@@ -15,7 +15,7 @@ nav ul li a {
   color: black;
   transition: background-color 0.5s;
   text-transform: uppercase;
- 
+
 }
 
 
@@ -24,15 +24,25 @@ nav ul li a:hover {
 }
 
 
-#ll{
+#ll {
   font-size: 3em;
   padding: 20px;
   text-align: center;
   position: relative;
   top: 0;
-  margin:0;
+  margin: 0;
 }
 
-header{
+header {
   background-color: #FFFDD0;
+}
+
+footer {
+  position: sticky;
+  bottom: 0;
+  background-color: #FFFDD0;
+  padding: 0.25rem;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  text-align: center;
 }
