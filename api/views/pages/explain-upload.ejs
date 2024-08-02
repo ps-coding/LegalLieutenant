@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <header><%- include("../partials/navbar") %></header>
+  <header><%- include("../partials/navbar"); %></header>
   <main>
     <div class="section">
       <div class="features">
@@ -22,12 +22,12 @@
       </div>
     </div>
     <form style="border-bottom: 2px solid black;" action="/explain-file" method="POST" enctype="multipart/form-data">
-      <input type="file" id="file" name="file" />
+      <input type="file" id="file" name="file" required />
       <button type="submit">Explain File Document</button>
     </form>
     <form action="/explain-text" method="POST">
-      <label style="margin: 10px 0; font-size: 2em;">Insert Text Document:</label>
-      <textarea id="documentContent" name="documentContent" rows="25" cols="80"></textarea>
+      <label for="documentContent">Insert Text Document:</label>
+      <textarea id="documentContent" name="documentContent" rows="25" cols="80" required></textarea>
       <button type="submit">Explain Text Document</button>
     </form>
   </main>

@@ -11,7 +11,11 @@
   <header><%- include('../partials/navbar'); %></header>
   <main>
     <form action="/explain-text" method="POST">
-      <textarea rows="25" cols="80" id="documentContent" name="documentContent" data-content="<%= documentContent %>"><%= documentContent %></textarea>
+      <label for="documentContent">Document Draft (edit as needed):</label>
+      <textarea rows="25" cols="80" id="documentContent" name="documentContent" data-content="<%= documentContent %>"
+        required>
+        <%= documentContent %>
+      </textarea>
       <button type="submit">Explain Generated Document</button>
     </form>
   </main>

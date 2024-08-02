@@ -90,7 +90,7 @@ const groupGeneratedSections = (documentContent) => {
 
 const summarize = async (section) => {
   const params = {
-    messages: [{ role: 'user', content: `Summarize the following section from a legal document in one simple sentence:\n${section}` }],
+    messages: [{ role: 'user', content: `Summarize the following section from a legal document in one simple and concise sentence. If and only if it is applicable, add one or two simple sentences about important clarifications for the reader/author. If applicable, also include potential loopholes, pitfalls, or issues relating to this section. Here is the section:\n${section}` }],
     model: 'gpt-4o-mini',
   };
   const response = await client.chat.completions.create(params);
