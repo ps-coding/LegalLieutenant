@@ -9,12 +9,25 @@
 <body>
   <header><%- include("../partials/navbar") %></header>
   <main>
-    <form action="/explain-file" method="POST" enctype="multipart/form-data">
+    <div class="section">
+      <div class="features">
+        <div class="feature">
+          <h4>Form Selection</h4>
+          <p>Provide help when filling out forms to suit your needs.</p>
+        </div>
+        <div class="feature">
+          <h4>Summarization</h4>
+          <p>Summarize sections and define words within your documents.</p>
+        </div>
+      </div>
+    </div>
+    <form style="border-bottom: 2px solid black;" action="/explain-file" method="POST" enctype="multipart/form-data">
       <input type="file" id="file" name="file" />
       <button type="submit">Explain File Document</button>
     </form>
     <form action="/explain-text" method="POST">
-      <textarea id="documentContent" name="documentContent"></textarea>
+      <label style="margin: 10px 0; font-size: 2em;">Insert Text Document:</label>
+      <textarea id="documentContent" name="documentContent" rows="25" cols="80"></textarea>
       <button type="submit">Explain Text Document</button>
     </form>
   </main>

@@ -10,15 +10,27 @@
   <header><%- include('../partials/navbar'); %></header>
   <main>
     <main>
+      <div class="section">
+        <div class="features">
+          <div class="feature">
+            <h4>Document Generation</h4>
+            <p>Generate custom legal documents from scratch with ease.</p>
+          </div>
+          <div class="feature">
+            <h4>Summarization</h4>
+            <p>Summarize sections and define words within your documents.</p>
+          </div>
+        </div>
+      </div>
       <form action="/generate-text" method="POST">
         <div>
-          <label for="formName">Form Name:</label>
-          <input type="text" id="formName" name="formName" />
+          <label for="formName" style="margin: 15px 0; font-size: 2em;">Form Name:</label>
+          <input style="width:400px;"type="text" id="formName" name="formName" />
         </div>
         <div>
-          <label for="information">Information:</label>
+          <label for="information" style="margin: 15px 0; font-size: 2em;">Information:</label>
           <br />
-          <textarea id="information" name="information"></textarea>
+          <textarea id="information" name="information" rows="25" cols="80"></textarea>
         </div>
         <button type="submit">Generate Text Document</button>
       </form>
