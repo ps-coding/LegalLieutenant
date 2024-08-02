@@ -20,3 +20,18 @@ body {
   padding: 0; */
   background-color: #fffbe3;
 }
+
+#tgl{
+  background-color: #006400;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem;
+  transition: color 500ms, background-color 500ms;
+  cursor: pointer;
+}
+
+#tgl:hover {
+  background-color: lightgreen;
+  color: black;
+}
