@@ -3,3 +3,4 @@ node_modules/
 uploads/
 .DS_Store
 venv
+.vercel
