@@ -1,10 +1,14 @@
+body {
+  /* margin: 0;
+  padding: 0; */
+  background-color: #fffbe3;
+}
+
 form {
   background-color: peachpuff;
   padding: 1rem;
-  /* border: 2px solid black;
-  border-radius: 10px; */
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2rem;
@@ -15,6 +19,7 @@ textarea {
   padding: 0.5rem;
   border: 2px solid black;
   border-radius: 10px;
+  max-width: 95%;
 }
 
 button[type="submit"] {
@@ -32,12 +37,6 @@ button[type="submit"]:hover {
   color: black;
 }
 
-body {
-  /* margin: 0;
-  padding: 0; */
-  background-color: #fffbe3;
-}
-
 .section {
   padding: 40px 20px;
   min-height: 20vh;
@@ -51,6 +50,7 @@ body {
   gap: 20px;
   flex-wrap: wrap;
 }
+
 .feature {
   background-color: #fffbf2;
   padding: 20px;
@@ -59,7 +59,8 @@ body {
   width: 300px;
   text-align: left;
 }
+
 .feature h4 {
   margin-top: 0;
-  text-align:center;
+  text-align: center;
 }
