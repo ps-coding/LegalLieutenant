@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head'); %>
+    <link rel="stylesheet" href="/css/forms.css" />
+    <script src="/js/generate-results.js" defer></script>
+</head>
+
+<body>
+  <header><%- include('../partials/navbar'); %></header>
+  <main>
+    <form action="/explain-text" method="POST">
+      <textarea id="documentContent" name="documentContent" data-content="<%= documentContent %>"><%= documentContent %></textarea>
+      <button type="submit">Explain Generated Document</button>
+    </form>
+  </main>
+</body>

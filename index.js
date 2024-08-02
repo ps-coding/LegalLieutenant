@@ -139,13 +139,11 @@ app.post("/explain-text", async (req, res) => {
   res.status(201).render("pages/explain-results", { sections, documentContent });
 });
 
-app.post("/generate", async (req, res) => {
+app.post("/generate-text", async (req, res) => {
   const formName = req.body.formName.trim();
   const information = req.body.information.trim();
   const documentContent = await create(formName, information)
-  const groupedSections = groupGeneratedSections(documentContent);
-  const sections = await Promise.all(groupedSections.map(async (section) => ({ content: section, summary: await summarize(section) })));
-  res.render("pages/explain-results", { sections, documentContent })
+  res.render("pages/generate-results", { documentContent })
 })
 
 app.listen(port, () => {
