@@ -14,3 +14,9 @@ div:hover {
 .hidden {
   display: none;
 }
+
+body {
+  /* margin: 0;
+  padding: 0; */
+  background-color: #fffbe3;
+}
