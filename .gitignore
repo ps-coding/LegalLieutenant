@@ -1,6 +1,4 @@
 node_modules/
-uploads/
+.vercel
 .env
 .DS_Store
-venv
-.vercel
