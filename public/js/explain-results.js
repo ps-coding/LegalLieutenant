@@ -35,7 +35,14 @@ function toggleSections() {
 
 function defineText() {
   const selection = window.getSelection().toString();
-  const word = selection.split(" ")[0]
+  const words = selection.split(" ")
+
+  if (words.length > 1) {
+    return;
+  }
+
+  const word = words[0];
+
   if (word) {
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
       .then((res) => res.json())
