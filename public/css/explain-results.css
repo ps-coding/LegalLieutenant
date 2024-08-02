@@ -1,0 +1,16 @@
+div {
+  padding: 1rem;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: lightblue;
+  transition: background-color 500ms;
+  overflow-y: auto;
+}
+
+div:hover {
+  background-color: green;
+}
+
+.hidden {
+  display: none;
+}

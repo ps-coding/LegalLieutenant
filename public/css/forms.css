@@ -1,0 +1,33 @@
+form {
+  background-color: coral;
+  padding: 1rem;
+  border: 2px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+input[type="text"],
+textarea {
+  padding: 0.5rem;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+button[type="submit"] {
+  background-color: darkblue;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem;
+  transition: color 500ms, background-color 500ms;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: lightgreen;
+  color: black;
+}

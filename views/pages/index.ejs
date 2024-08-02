@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head'); %>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+
+    .main {
+      background-color: peachpuff;
+      background-size: cover;
+      background-position: center;
+      min-height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+    .main-content {
+      position: relative;
+      z-index: 1;
+    }
+    .main h2 {
+      margin: 0;
+      font-size: 5em;
+    }
+    .main p {
+      margin: 15px 0;
+      font-size: 2em;
+    }
+    .buttons {
+      margin-top: 20px;
+    }
+    .buttons a {
+      color: white;
+      background-color: #006400;
+      padding: 10px 20px;
+      text-decoration: none;
+      margin: 0 10px;
+      border-radius: 5px;
+      transition: background-color 0.5s;
+      
+    }
+    .buttons a:hover {
+      background-color: #004700;
+    }
+    .section {
+      padding: 40px 20px;
+      min-height: 40vh;
+      text-align: center;
+      background-color: #e0f7fa;
+    }
+    .section h3 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .feature {
+      background-color: #fffbf2;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      width: 300px;
+      text-align: left;
+    }
+    .feature h4 {
+      margin-top: 0;
+      text-align:center;
+    }
+    /* #bg{
+        display: block;
+        max-width: 100%;
+        z-index: -9999;
+        opacity: 1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    } */
+  </style>
+</head>
+
+
+<body>
+  <header style="background-color: #FFFDD0;"><%- include('../partials/navbar'); %></header>
+  <!-- <img src="media/homebg.jpg" id="bg">  -->
+ 
+  <div class="main">
+    <div class="main-content">
+      <h2>Need Help Filling Out Documents?</h2>
+      <p>Your One-Stop Solution for Legal Documents</p>
+      <div class="buttons">
+        <a href="/explain">Import Document</a>
+        <a href="/generate">Generate</a>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <h3>Our Features</h3>
+    <div class="features">
+      <div class="feature">
+        <h4>Form Selection</h4>
+        <p>Provide help when filling out forms to suit your needs.</p>
+      </div>
+      <div class="feature">
+        <h4>Document Generation</h4>
+        <p>Generate custom legal documents from scratch with ease.</p>
+      </div>
+      <div class="feature">
+        <h4>Summarization</h4>
+        <p>Summarize sections and define words within your documents.</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</body>
+
+
+</html>
+
+
+

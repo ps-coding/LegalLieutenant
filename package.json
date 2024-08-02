@@ -1,0 +1,35 @@
+{
+  "name": "legallieutenant",
+  "version": "1.0.0",
+  "description": "Make any legal work a breeze",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samik-py/LegalLieutenant.git"
+  },
+  "keywords": [
+    "legal",
+    "lieutenant",
+    "helper"
+  ],
+  "author": "Project: Empower South Jersey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samik-py/LegalLieutenant/issues"
+  },
+  "homepage": "https://github.com/samik-py/LegalLieutenant#readme",
+  "dependencies": {
+    "any-text": "^1.2.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "fs": "^0.0.1-security",
+    "multer": "^1.4.5-lts.1",
+    "openai": "^4.53.2",
+    "path": "^0.12.7",
+    "process": "^0.11.10"
+  }
+}
