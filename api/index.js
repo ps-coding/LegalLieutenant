@@ -18,7 +18,7 @@ app.set("view engine", "ejs");
 
 const storage = multer.diskStorage({
   destination: function (_, _, cb) {
-    cb(null, 'uploads/');
+    cb(null, path.join(__dirname, '..', 'uploads'));
   },
   filename: function (_, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
