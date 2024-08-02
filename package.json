@@ -2,7 +2,7 @@
   "name": "legallieutenant",
   "version": "1.0.0",
   "description": "Make any legal work a breeze",
-  "main": "index.js",
+  "main": "api/index.js",
   "engines": {
     "node": "20.x"
   },
@@ -21,9 +21,9 @@
   "author": "Project: Empower South Jersey",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/samik-py/LegalLieutenant/issues"
+    "url": "https://github.com/ps-coding/LegalLieutenant/issues"
   },
-  "homepage": "https://github.com/samik-py/LegalLieutenant#readme",
+  "homepage": "https://github.com/ps-coding/LegalLieutenant#readme",
   "dependencies": {
     "any-text": "^1.2.0",
     "dotenv": "^16.4.5",

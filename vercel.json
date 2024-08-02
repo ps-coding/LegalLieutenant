@@ -1,16 +1,13 @@
 {
   "version": 2,
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/"
+      "source": "/(.*)",
+      "destination": "/api"
     }
   ],
   "functions": {
-    "*": {
-      "maxDuration": 30
-    },
-    "**/*": {
+    "api/index.js": {
       "maxDuration": 30
     }
   }
