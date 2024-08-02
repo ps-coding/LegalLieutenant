@@ -10,11 +10,6 @@ const openai = require("openai");
 
 const app = express();
 const port = process.env["PORT"] || 3000;
-const uploadsDir = path.join(__dirname, '..', 'uploads');
-
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
-}
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(express.urlencoded({ extended: true }))
@@ -23,7 +18,7 @@ app.set("view engine", "ejs");
 
 const storage = multer.diskStorage({
   destination: function (_, _, cb) {
-    cb(null, uploadsDir);
+    cb(null, "/tmp");
   },
   filename: function (_, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
