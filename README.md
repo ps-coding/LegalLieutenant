@@ -1,4 +1,4 @@
-# Legal Lieutenant
+# [Legal Lieutenant](https://legal-lieutenant.vercel.app/)
 
 ## Project Description
 Our website is designed to assist first-generation, low-income students in navigating complex and dense legal documents, such as immigration forms, employment documents, the FAFSA, and various contracts. Legal counsel is often very expensive, so these students are often alone, wandering through the vast complexities of the U.S. legal system without assistance. This can lead to them signing predatory contracts or filling out forms incorrectly, which could jeopardize their future, especially at critical junctures.
@@ -53,7 +53,7 @@ The inspiration for this project stemmed from our personal experiences as first-
   * `css` - CSS files
   * `js` - JavaScript files
 
-## Setup
+## Local Setup
 * Clone the respository
 * Run `npm install`
 * Add your own `OPENAI_API_KEY` to a `.env` file
