@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head'); %>
+    <link rel="stylesheet" href="css/forms.css" />
+    <script src="/js/generate-confirm-information.js" defer></script>
+</head>
+
+<body>
+  <header><%- include('../partials/navbar'); %></header>
+  <main>
+    <h1>Confirm Information</h1>
+    <form action="/generate-with-outline" method="POST">
+      <label for="formName">Form Name:</label>
+      <input type="text" id="formName" name="formName" value="<%= formName %>" required />
+      <label for="template">Generic Outline (based on the provided sample/template/information document, edit as needed):</label>
+      <textarea id="template" name="template" rows="25" cols="80" data-content="<%= template %>" required><%= template %></textarea>
+      <label for="information">Information (context and/or sample):
+        <br />
+        Additional Information Suggestion:
+        <p data-content="<%= additionalQuestions %>"><%= additionalQuestions %></p>
+      </label>
+      <textarea id="information" name="information" rows="25" cols="80" data-content="<%= information %>" required><%= information %></textarea>
+      <button type="submit">Generate Text Document</button>
+    </form>
+  </main>
+  <footer>
+    <%- include('../partials/footer'); %>
+  </footer>
+</body>
+
+</html>

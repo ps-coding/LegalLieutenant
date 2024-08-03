@@ -55,47 +55,14 @@ const groupSections = (documentContent) => {
   return groupedSections;
 }
 
-
-const groupGeneratedSections = (documentContent) => {
-  let splitSections = documentContent.replaceAll(/^((#+.*)|(\*+.*))\r?\n/gm, "[;break;]").replaceAll(/\s*\**\s*((Part)|(Article)|(Section)|(Preamble)|(Definitions)|(Clauses))\.?\s*((([0-9]+)|([IVXLCDM]+)|([A-Z]+))\.?)?\s*.{0,35}\**\s*\r?\n/gi, "[;break;]").split("[;break;]");
-
-  if (splitSections.length == 1) {
-    splitSections = splitSections[0].split("\n\n");
-  }
-
-  if (splitSections.length == 1) {
-    splitSections = splitSections[0].split("\n");
-  }
-
-  if (splitSections.length == 1) {
-    splitSections = splitSections[0].replaceAll(/([\.\?!])/g, "$1\n").split("\n");
-
-    let result = [splitSections[0]];
-    for (let i = 1; i < splitSections.length; i++) {
-      const last = result[result.length - 1];
-      if (last.length < 800) {
-        result[result.length - 1] = last + splitSections[i];
-      } else {
-        result.push(splitSections[i]);
-      }
-    }
-
-    splitSections = result;
-  }
-
-  const groupedSections = splitSections.map((section) => section.trim()).filter((section) => section != "")
-
-  return groupedSections;
-}
-
 const summarize = async (section) => {
   const params = {
-    messages: [{ role: 'user', content: `Summarize the following section from a legal document in one simple and concise sentence. If and only if it is applicable, add one or two simple sentences about important clarifications for the reader/author. If applicable, also include potential loopholes, pitfalls, or issues relating to this section. Here is the section:\n${section}` }],
+    messages: [{ role: 'user', content: `Summarize the following section from a legal document in one simple and concise sentence. If applicable, add one or two simple sentences about important clarifications for the reader/author. If applicable, also include potential loopholes, pitfalls, or issues relating to this section. Here is the section:\n${section}` }],
     model: 'gpt-4o-mini',
   };
   const response = await client.chat.completions.create(params);
   return response.choices[0].message.content;
-}
+};
 
 const create = async (formName, information) => {
   const params = {
@@ -105,6 +72,33 @@ const create = async (formName, information) => {
   const response = await client.chat.completions.create(params);
   return response.choices[0].message.content;
 }
+
+const outline = async (formName, scan) => {
+  const params = {
+    messages: [{ role: 'user', content: `Generate a detailed outline for a legal form/document for the ${formName} based on the provided sample, template, or information document. Ensure that all relevant fields, paragraphs, and sections are covered in the order that they should appear in the actual legal document with their options and requirements stated. The outline should be detailed enough to guide the generation of the ${formName} from scratch. Only output the useful parts of the outline. Here is the original document:\n${scan}` }],
+    model: 'gpt-4o-mini',
+  };
+  const response = await client.chat.completions.create(params);
+  return response.choices[0].message.content;
+};
+
+const additionalInformation = async (formName, information, template) => {
+  const params = {
+    messages: [{ role: 'user', content: `Generate a few sentences asking the user for the additional information that would be required to fill the ${formName}.\n\n\nThe user has already provided the following information:\n${information}\n\n\nHere is a outline of the entire form/document generated from a sample, template, or information document:\n${template}` }],
+    model: 'gpt-4o-mini',
+  };
+  const response = await client.chat.completions.create(params);
+  return response.choices[0].message.content;
+};
+
+const createWithOutline = async (formName, information, template) => {
+  const params = {
+    messages: [{ role: 'user', content: `Generate a complete and filled draft for a legal form/document for the ${formName}. Try your best; it is just a rough draft. An expert will review this later. Only output the document, and leave fields that you do not know how to fill blank.\n\n\nHere is an outline generated from a sample, information document, or template for the ${formName}. Note that you must generate the complete legal form/document with detail (do not just fill in the outline; make sure to add all required components):\n${template}\n\n\nHere is some additional information about the document/form/situation:\n${information}` }],
+    model: 'gpt-4o-mini',
+  };
+  const response = await client.chat.completions.create(params);
+  return response.choices[0].message.content;
+};
 
 app.get("/", (_, res) => {
   res.render("pages/index");
@@ -139,12 +133,29 @@ app.post("/explain-text", async (req, res) => {
   res.status(201).render("pages/explain-results", { sections, documentContent });
 });
 
-app.post("/generate-text", async (req, res) => {
+app.post("/generate-text", upload.single("template"), async (req, res) => {
   const formName = req.body.formName.trim();
   const information = req.body.information.trim();
-  const documentContent = await create(formName, information)
-  res.render("pages/generate-results", { documentContent })
-})
+
+  if (req.file) {
+    const scan = await reader.getText(req.file.path);
+    const template = await outline(formName, scan);
+    const additionalQuestions = await additionalInformation(formName, information, template);
+    res.render("pages/generate-confirm-information", { formName, template, information, additionalQuestions });
+  } else {
+    const documentContent = await create(formName, information);
+    res.render("pages/generate-results", { documentContent });
+  }
+});
+
+app.post("/generate-with-outline", async (req, res) => {
+  const formName = req.body.formName.trim();
+  const information = req.body.information.trim();
+  const template = req.body.template.trim();
+
+  const documentContent = await createWithOutline(formName, information, template);
+  res.render("pages/generate-results", { documentContent });
+});
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}.`);

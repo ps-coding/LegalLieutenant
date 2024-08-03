@@ -25,9 +25,12 @@
         </div>
       </div>
     </div>
-    <form action="/generate-text" method="POST">
+    <form action="/generate-text" method="POST" enctype="multipart/form-data">
       <label for="formName">Form Name:</label>
       <input type="text" id="formName" name="formName" required />
+      <label for="template">Template/Sample/Information Document (increases accuracy at the cost of time,
+        optional):</label>
+      <input type="file" id="template" name="template" />
       <label for="information">Information (context and/or sample):</label>
       <textarea id="information" name="information" rows="25" cols="80" required></textarea>
       <button type="submit">Generate Text Document</button>

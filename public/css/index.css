@@ -64,12 +64,11 @@ body {
 
 .section.left {
   background-color: lightgreen;
+  text-align: left;
 }
 
-.section.left ul {
-  text-align: left;
-  display: table;
-  margin: 0 auto;
+.section.left h3 {
+  text-align: center;
 }
 
 .features {
@@ -95,8 +94,4 @@ body {
 
 .feature p {
   text-align: center;
-}
-
-iframe {
-  max-width: 95%;
 }
