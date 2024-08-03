@@ -61,19 +61,22 @@ The inspiration for this project stemmed from our personal experiences as first-
 * Open `localhost:3000` to preview the application
 
 ## User Guide
+Visit the [public site](https://legal-lieutenant.vercel.app/).
 See this [tutorial video](https://youtu.be/YATQxAUbbBc).
 * Summarize page
   * Upload a PDF, DOC, DOCX, etc. or enter the document text
   * Press submit
   * Once the summary screen loads, hover over any section to see the summary and potential concerning areas
-  * Press the toggle button to switch between the summary and raw text view
-  * In the raw text view, highlight or double-click on a word to see its definition
+  * Press the toggle button to switch between the summary and raw text views
+  * In the raw text view, highlight or double-click on a word to see its definition in a pop-up
 * Generate page
   * Provide the document title
+    * If you don't know the specific title, provide the document category, such as "immigration papers," and the document will be inferred
   * Provide all applicable information
   * Press submit
   * Once the results screen loads, edit the document as desired
-  * Then, press the view summary screen to see the summary
+    * Blanks will be present where there was not enough information to fill something, so pay close attention to those
+  * Finally, press the view summary button to see the summary
 
 ## Contribution Guidelines
 * Open an issue with the following:
