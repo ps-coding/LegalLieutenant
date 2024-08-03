@@ -50,7 +50,7 @@ const groupSections = (documentContent) => {
     splitSections = result;
   }
 
-  const groupedSections = splitSections.map((section) => section.trim()).filter((section) => section != "")
+  const groupedSections = splitSections.map((section) => section.trim()).filter((section) => section != "").filter((section) => /\d/.test(section) || /[a-zA-Z]/.test(section));
 
   return groupedSections;
 }
