@@ -63,17 +63,17 @@ The inspiration for this project stemmed from our personal experiences as first-
 ## User Guide
 See this [tutorial video](https://youtu.be/YATQxAUbbBc).
 * Summarize page
- * Upload a PDF, DOC, DOCX, etc. or enter the document text
- * Press submit
- * Once the summary screen loads, hover over any section to see the summary and potential concerning areas
- * Press the toggle button to switch between the summary and raw text view
- * In the raw text view, highlight or double-click on a word to see its definition
+  * Upload a PDF, DOC, DOCX, etc. or enter the document text
+  * Press submit
+  * Once the summary screen loads, hover over any section to see the summary and potential concerning areas
+  * Press the toggle button to switch between the summary and raw text view
+  * In the raw text view, highlight or double-click on a word to see its definition
 * Generate page
- * Provide the document title
- * Provide all applicable information
- * Press submit
- * Once the results screen loads, edit the document as desired
- * Then, press the view summary screen to see the summary
+  * Provide the document title
+  * Provide all applicable information
+  * Press submit
+  * Once the results screen loads, edit the document as desired
+  * Then, press the view summary screen to see the summary
 
 ## Contribution Guidelines
 * Open an issue with the following:
