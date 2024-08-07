@@ -32,7 +32,7 @@ const client = new openai.OpenAI({
 });
 
 const groupSections = (documentContent) => {
-  let splitSections = documentContent.replaceAll(/^((\s*((#+.*)|(\*+.*))(\r?\n)+)+)/gm, "[;break;]$1").replaceAll(/^((\s*\**\s*(((Part)|(Article)|(Section)|(Preamble)|(Clauses)|(Definitions)|(Clause)|(Definition))\.?\s*((([0-9]+)|([IVXLCDM]+)|([A-Z]+))\.?)?\s*.{0,35})\**\s*(\r?\n)+)+)/gmi, "[;break;]$1").replaceAll("\n", " ").split("[;break;]");
+  let splitSections = documentContent.replaceAll(/^((\s*((#+.*)|(\*+.*))(\r?\n)+)+)/gm, "[;break;]$1").replaceAll(/^((\s*\**\s*(((Part)|(Article)|(Section)|(Preamble)|(Clauses)|(Definitions)|(Clause)|(Definition))\.?\s*((([0-9]+)|([IVXLCDM]+)|([A-Z]+))\.?)?\s*(((:)|(-)|(–)|(—))+\s*.{0,35})?)\**\s*(\r?\n)+)+)/gmi, "[;break;]$1").replaceAll("\n", " ").split("[;break;]");
 
   if (splitSections.length == 1) {
     splitSections = splitSections[0].replaceAll(/([\.\?!])/g, "$1\n").split("\n");
