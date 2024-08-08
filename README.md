@@ -1,4 +1,7 @@
-# [Legal Lieutenant](https://legal-lieutenant.vercel.app/)
+# [Legal Lieutenant](https://legal-lieutenant.vercel.app)
+
+## Status Update
+**Won 1st Place 🥇 in the hackathon [Empower Hacks 2.0](https://empower-hacks-2-0.devpost.com)**
 
 ## Project Description
 Our website is designed to assist first-generation, low-income students in navigating complex and dense legal documents, such as immigration forms, employment documents, the FAFSA, and various contracts. Legal counsel is often very expensive, so these students are often alone, wandering through the vast complexities of the U.S. legal system without assistance. This can lead to them signing predatory contracts or filling out forms incorrectly, which could jeopardize their future, especially at critical junctures.
