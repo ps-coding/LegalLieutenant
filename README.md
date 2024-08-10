@@ -5,6 +5,12 @@
 We made this project for the [Empower Hacks 2.0](https://empower-hacks-2-0.devpost.com) hackathon. **This was an international competition with 1,900+ participants!** The hacking period was from July 26 at 6:00 PM EDT to August 3 at 2:45 AM EDT. Judging lasted from August 3 at 12:00 PM EDT to August 7 at 2:45 AM EDT (which is why there were no pushed commits during that period, although I did tinker on my local copy to keep the momentum going and pushed afterward). Our team addressed the following prompt:
 > Create a software (website, app, etc.) that addresses an issue in first-generation low-income students, such as financial planning, career opportunities, mental health, community building, or an issue found/experienced in your community.
 
+## Contributors
+- Prasham Shah ([ps-coding](https://github.com/ps-coding)): Team Lead and Chief Coder/Writer
+- Samik Shah ([samik-py](https://github.com/samik-py)): Back-End Coder
+- Aniketh Chadive ([ani369chad](https://github.com/ani369chad)): Front-End Coder
+- Pahul Virk: Writer
+
 ## Project Description
 Our website is designed to assist first-generation, low-income students in navigating complex and dense legal documents, such as immigration forms, employment documents, the FAFSA, and various contracts. Legal counsel is often very expensive, so these students are often alone, wandering through the vast complexities of the U.S. legal system without assistance. This can lead to them signing predatory contracts or filling out forms incorrectly, which could jeopardize their future, especially at critical junctures.
 In response to these issues, our website simplifies the process of understanding and creating important legal documents by summarizing sections, defining difficult terms, and generating filled documents from scratch based on provided information (such as personal information or an outline).
