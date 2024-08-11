@@ -27,43 +27,41 @@
             Explain page ▼
           </button>
           <div class="content">
-            <p>
+            <ol>
               <li>Provide the document title
                 <ul>
-                  <li>-If you don't know the specific title, provide the document category, such as "immigration
+                  <li>If you don't know the specific title, provide the document category, such as "immigration
                     papers," and the document will be inferred</li>
                 </ul>
               </li>
               <li>If you have a sample/template/information document to upload:
-                <ul>
-                  <li>1. Upload the document</li>
-                  <li>2. Provide additional information about your situation and/or the document</li>
-                  <li>3. Press submit</li>
-                  <li>4. A new screen will be presented with an outline generated based on your uploaded document and a
+                <ol>
+                  <li>Upload the document</li>
+                  <li>Provide additional information about your situation and/or the document</li>
+                  <li>Press submit</li>
+                  <li>A new screen will be presented with an outline generated based on your uploaded document and a
                     prompt asking for more information</li>
-                  <li>5. Edit the outline and provide more information if needed (if you do not provide certain pieces of
+                  <li>Edit the outline and provide more information if needed (if you do not provide certain pieces of
                     information, the corresponding sections will be left blank in the generated document)</li>
-                  <li>6. Press submit</li>
-                </ul>
+                  <li>Press submit</li>
+                </ol>
               </li>
               <li>Otherwise, if you do not have a sample/template/information document to upload:
-                <ul>
-                  <li>1. Provide all applicable information about your situation, and include as much information about the
+                <ol>
+                  <li>Provide all applicable information about your situation, and include as much information about the
                     document itself as possible</li>
-                  <li>2. Press submit</li>
-                </ul>
+                  <li>Press submit</li>
+                </ol>
               </li>
               <li>Once the generate results screen loads, edit the document as desired
-                <ul>
-                  <li>1. Blanks will be present where the AI model did not have enough information to fill something, so make
+                <ol>
+                  <li>Blanks will be present where the AI model did not have enough information to fill something, so make
                     sure to fill in those parts carefully</li>
-                  <li>2. Press submit</li>
-                </ul>
+                  <li>Press submit</li>
+                </ol>
               </li>
               <li>The explain results page screen will then appear with the generated document already populated</li>
-            </ul>
-          </li>
-            </p>
+            </ol>
           </div>
         </div>
     
@@ -72,23 +70,21 @@
             Generate page ▼
           </button>
           <div class="content">
-            <p>
-              <ul>
-                <li>1. Upload a PDF, DOC, DOCX, etc., or enter the document's text</li>
-                <li>2. Press submit</li>
-                <li>3. Once the explain results screen loads, hover over any section to see a section summary and potential
+              <ol>
+                <li>Upload a PDF, DOC, DOCX, etc., or enter the document's text</li>
+                <li>Press submit</li>
+                <li>Once the explain results screen loads, hover over any section to see a section summary and potential
                   concerning areas
                 </li>
-                <li>4. Press the toggle button to switch between the summary and raw-text views</li>
-                <li>5. In the raw-text view, highlight or double-click on a word to see its definition
+                <li>Press the toggle button to switch between the summary and raw-text views</li>
+                <li>In the raw-text view, highlight or double-click on a word to see its definition
                   <ul>
-                    <li>-The definition will appear in a pop-up</li>
-                    <li>-You must have one and only one word selected; otherwise, we will assume that you are just trying to
+                    <li>The definition will appear in a pop-up</li>
+                    <li>You must have one and only one word selected; otherwise, we will assume that you are just trying to
                       copy a part of the document</li>
                   </ul>
                 </li>
-              </ul> 
-            </p>
+              </ol> 
           </div>
         </div>
       </div>
@@ -126,7 +122,6 @@
     function openOpenable(e) {
         e.parentElement.classList.toggle("open");
         if (e.parentElement.classList.contains("open")) {
-          e.parentElement.children[1].scrollIntoView({ behavior: "smooth" });
           e.innerHTML = e.innerHTML.replace("▼", "▲");
         } else {
           e.innerHTML = e.innerHTML.replace("▲", "▼");
