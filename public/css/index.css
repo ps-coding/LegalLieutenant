@@ -101,13 +101,13 @@ body {
 }
 
 .buttons {
-  margin-top: 20px;
+  margin-top: 10%;
 }
 
 .buttons a {
   color: white;
   background-color: #006400;
-  padding: 10px 20px;
+  padding: 1% 2%;
   text-decoration: none;
   margin: 0 10px;
   border-radius: 5px;
