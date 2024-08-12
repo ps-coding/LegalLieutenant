@@ -50,6 +50,10 @@ body {
   margin-bottom: 2%;
 }
 
+.openable button {
+  cursor: pointer;
+}
+
 .openable .content {
   background: linear-gradient(
     135deg,
@@ -128,7 +132,7 @@ body {
 
 .main h2 {
   margin: 0;
-  font-size: 5em;
+  font-size: 4em;
 }
 
 .main p {
@@ -137,17 +141,18 @@ body {
 }
 
 .buttons {
-  margin-top: 10%;
+  margin: 1rem;
 }
 
 .buttons a {
   color: white;
   background-color: #006400;
-  padding: 1% 2%;
+  padding: 0.7rem;
   text-decoration: none;
   margin: 0 10px;
   border-radius: 5px;
   transition: background-color 0.5s;
+  display: inline-block;
 }
 
 .buttons a:hover {

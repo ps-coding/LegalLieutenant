@@ -21,11 +21,10 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 720px;
   margin: 0 auto;
   padding-top: 2vh;
-  height: 8vh;
   list-style: none;
+  flex-wrap: wrap;
 }
 
 .menu li {
@@ -36,6 +35,7 @@ html {
   font-family: "Varela Round", sans-serif;
 
   a {
+    display: inline-block;
     font-size: 22px;
     color: #777;
     text-decoration: none;
@@ -62,11 +62,10 @@ html {
   }
 }
 
-
 footer {
   position: sticky;
   bottom: 0;
-  background-color: #FFFDD0;
+  background-color: #fffdd0;
   padding: 0.25rem;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
