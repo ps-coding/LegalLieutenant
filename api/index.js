@@ -11,10 +11,31 @@ const openai = require("openai");
 const app = express();
 const port = process.env["PORT"] || 3000;
 
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+
+const users = {};
+
+
+
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(express.urlencoded({ extended: true }))
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+  secret: 'your_secret_key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
+
+function isLoggedIn(req, res, next) {
+  req.session.user ? next() : res.redirect('pages/login');
+}
+
+
 
 const storage = multer.diskStorage({
   destination: function (_, _, cb) {
@@ -100,8 +121,16 @@ const createWithOutline = async (formName, information, template) => {
   return response.choices[0].message.content;
 };
 
-app.get("/", (_, res) => {
-  res.render("pages/index");
+function ensureAuthenticated(req, res, next) {
+  if (req.session.user) {
+    return next();
+  }
+  res.redirect('/login');
+}
+
+
+app.get('/', ensureAuthenticated, (req, res) => {
+  res.render('pages/index', { user: req.session.user });
 });
 
 app.get("/explain", (_, res) => {
@@ -111,6 +140,57 @@ app.get("/explain", (_, res) => {
 app.get("/generate", (_, res) => {
   res.render("pages/generate-upload");
 });
+
+app.get('/', isLoggedIn, (req, res) => {
+  res.render('home', { user: req.session.user });
+});
+
+app.get('/login', (req, res) => {
+  res.render('pages/login');
+});
+
+app.get('/signup', (req, res) => {
+  res.render('pages/signup');
+});
+
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  const user = users[username];
+  
+  if (user && await bcrypt.compare(password, user.password)) {
+    req.session.user = user;
+    res.redirect('/');
+  } else {
+    res.send('Invalid username or password');
+  }
+});
+
+app.get('/signup', (req, res) => {
+  res.render('signup');
+});
+
+app.post('/signup', async (req, res) => {
+  const { username, password } = req.body;
+
+  if (users[username]) {
+    res.send('Username already taken');
+  } else {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    users[username] = { username, password: hashedPassword };
+    res.redirect('/login');
+  }
+});
+
+app.get('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      return res.redirect('/');
+    }
+    res.clearCookie('connect.sid');
+    res.redirect('/login');
+  });
+});
+
 
 app.post("/explain-file", upload.single("file"), async (req, res) => {
   if (req.file) {
@@ -160,4 +240,3 @@ app.post("/generate-with-outline", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server started on port ${port}.`);
 });
-
