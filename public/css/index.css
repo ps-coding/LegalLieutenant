@@ -2,9 +2,18 @@ body {
   background-color: #fffbe3;
 }
 
-.container{
+.container {
   display: flex;
   text-align: center;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    align-items: center;
+    flex-direction: column;
+  }
 }
 
 .header {
@@ -26,23 +35,26 @@ body {
   height: 100px;
   font-size: 1rem;
   transition: 0.8s;
-  }
-  
-  .header:hover {
-  background-color: forestgreen;
-  }
-  
-  .openable{
-  padding: 1%;
-  }
+}
 
-  .openable {
-    width: 75%;
-    margin-bottom: 2%;
-  }
-  
-  .openable .content {
-  height: 0;
+.header:hover {
+  background-color: forestgreen;
+}
+
+.openable {
+  padding: 1%;
+}
+
+.openable {
+  width: 75%;
+  margin-bottom: 2%;
+}
+
+.openable button {
+  cursor: pointer;
+}
+
+.openable .content {
   background: linear-gradient(
     135deg,
     rgba(255, 255, 20, 0.1),
@@ -55,22 +67,50 @@ body {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.5s ease-out;
-  }
-  
-  .openable .content * {
-  overflow: hidden;
-  padding-inline: 1rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-    sans-serif;
-  }
-  
-  .openable.open .content {
-  height: auto;
-  grid-template-rows: 1fr;
-  }
+  transition: grid-template-rows 0.5s ease-in-out;
+}
 
+.openable .content ul,
+.openable .content ol {
+  text-align: left;
+  list-style-position: inside;
+  overflow: hidden;
+  visibility: hidden;
+  transition: visibility 0.5s ease-in-out;
+  padding-inline: 1rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+}
+
+.openable .content > ol {
+  margin: 0;
+  transition:
+    visibility 0.5s ease-in-out,
+    margin 0.5s ease-in-out;
+}
+
+.openable.open .content {
+  grid-template-rows: 1fr;
+}
+
+.openable.open .content ul,
+.openable.open .content ol {
+  visibility: visible;
+}
+
+.openable.open .content > ol {
+  margin: 10px;
+}
 
 .main {
   background-color: peachpuff;
@@ -92,7 +132,7 @@ body {
 
 .main h2 {
   margin: 0;
-  font-size: 5em;
+  font-size: 4em;
 }
 
 .main p {
@@ -101,18 +141,18 @@ body {
 }
 
 .buttons {
-  margin-top: 10%;
+  margin: 1rem;
 }
 
 .buttons a {
   color: white;
   background-color: #006400;
-  padding: 1% 2%;
+  padding: 0.7rem;
   text-decoration: none;
   margin: 0 10px;
   border-radius: 5px;
   transition: background-color 0.5s;
-
+  display: inline-block;
 }
 
 .buttons a:hover {
