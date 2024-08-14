@@ -4,6 +4,10 @@
 <head>
   <%- include('../partials/head'); %>
     <link rel="stylesheet" href="css/index.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -11,12 +15,12 @@
   <main>
     <div class="main">
       <div class="main-content">
-        <h2>Legal Lieutenant</h2>
+        <img src="media/logo.png">
         <div class="buttons">
           <a href="/explain">Explain Document</a>
           <a href="/generate">Generate Document</a>
         </div>
-        <span><a href = "/logout"></a></span>
+        <span><a href="/logout"></a></span>
       </div>
     </div>
     <div class="section left">
@@ -56,7 +60,8 @@
               </li>
               <li>Once the generate results screen loads, edit the document as desired
                 <ol>
-                  <li>Blanks will be present where the AI model did not have enough information to fill something, so make
+                  <li>Blanks will be present where the AI model did not have enough information to fill something, so
+                    make
                     sure to fill in those parts carefully</li>
                   <li>Press submit</li>
                 </ol>
@@ -65,69 +70,70 @@
             </ol>
           </div>
         </div>
-    
+
         <div class="openable">
           <button class="header" id="btn1" onclick="openOpenable(this)">
             Generate page ▼
           </button>
           <div class="content">
-              <ol>
-                <li>Upload a PDF, DOC, DOCX, etc., or enter the document's text</li>
-                <li>Press submit</li>
-                <li>Once the explain results screen loads, hover over any section to see a section summary and potential
-                  concerning areas
-                </li>
-                <li>Press the toggle button to switch between the summary and raw-text views</li>
-                <li>In the raw-text view, highlight or double-click on a word to see its definition
-                  <ul>
-                    <li>The definition will appear in a pop-up</li>
-                    <li>You must have one and only one word selected; otherwise, we will assume that you are just trying to
-                      copy a part of the document</li>
-                  </ul>
-                </li>
-              </ol> 
+            <ol>
+              <li>Upload a PDF, DOC, DOCX, etc., or enter the document's text</li>
+              <li>Press submit</li>
+              <li>Once the explain results screen loads, hover over any section to see a section summary and potential
+                concerning areas
+              </li>
+              <li>Press the toggle button to switch between the summary and raw-text views</li>
+              <li>In the raw-text view, highlight or double-click on a word to see its definition
+                <ul>
+                  <li>The definition will appear in a pop-up</li>
+                  <li>You must have one and only one word selected; otherwise, we will assume that you are just trying
+                    to
+                    copy a part of the document</li>
+                </ul>
+              </li>
+            </ol>
           </div>
         </div>
       </div>
-      
 
 
-    <div class="section">
-      <h3>Our Key Features</h3>
-      <div class="features">
-        <div class="feature">
-          <h4>Decomposition</h4>
-          <p>Break down a big document into smaller pieces.</p>
-        </div>
-        <div class="feature">
-          <h4>Summarization</h4>
-          <p>Summarize sections and define words within your documents.</p>
-        </div>
-        <div class="feature">
-          <h4>Issue Identification</h4>
-          <p>Highlight loopholes, issues, or places where there is potential for confusion within each section.</p>
-        </div>
-        <div class="feature">
-          <h4>Document Generation</h4>
-          <p>Generate custom legal documents from scratch with ease.</p>
-        </div>
-        <div class="feature">
-          <h4>Context Inclusion</h4>
-          <p>Use the provided information and common knowledge to automate as much as possible.</p>
+
+      <div class="section">
+        <h3>Our Key Features</h3>
+        <div class="features">
+          <div class="feature">
+            <h4>Decomposition</h4>
+            <p>Break down a big document into smaller pieces.</p>
+          </div>
+          <div class="feature">
+            <h4>Summarization</h4>
+            <p>Summarize sections and define words within your documents.</p>
+          </div>
+          <div class="feature">
+            <h4>Issue Identification</h4>
+            <p>Highlight loopholes, issues, or places where there is potential for confusion within each section.</p>
+          </div>
+          <div class="feature">
+            <h4>Document Generation</h4>
+            <p>Generate custom legal documents from scratch with ease.</p>
+          </div>
+          <div class="feature">
+            <h4>Context Inclusion</h4>
+            <p>Use the provided information and common knowledge to automate as much as possible.</p>
+          </div>
         </div>
       </div>
-    </div>
   </main>
 
   <script>
     function openOpenable(e) {
-        e.parentElement.classList.toggle("open");
-        if (e.parentElement.classList.contains("open")) {
-          e.innerHTML = e.innerHTML.replace("▼", "▲");
-        } else {
-          e.innerHTML = e.innerHTML.replace("▲", "▼");
-        }
+      e.parentElement.classList.toggle("open");
+      if (e.parentElement.classList.contains("open")) {
+        e.innerHTML = e.innerHTML.replace("▼", "▲");
+      } else {
+        e.innerHTML = e.innerHTML.replace("▲", "▼");
       }
+    }
   </script>
   <footer>
     <%- include('../partials/footer'); %>

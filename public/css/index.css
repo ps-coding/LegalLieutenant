@@ -1,5 +1,5 @@
 body {
-  background-color: #fffbe3;
+  background-color: whitesmoke;
 }
 
 .container {
@@ -7,6 +7,10 @@ body {
   text-align: center;
   flex-direction: row;
   align-items: flex-start;
+}
+
+img{
+  width: 50vh;
 }
 
 @media screen and (max-width: 900px) {
@@ -29,8 +33,22 @@ span a{
   transform-style: preserve-3d;
   transform: translateZ(-25px);
   transition: transform .25s;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Varela", sans-serif;
+  font-weight: bold;
+  font-style: normal;
   
+}
+
+h4{
+  font-family: "Varela", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+}
+
+p{
+  font-family: "Varela", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 span a:before,
 span a:after{
@@ -41,17 +59,20 @@ span a:after{
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 5px solid black;
+  border: 5px solid #3C3C3C;
   box-sizing: border-box;
   border-radius: 5px;
+  font-family: "Varela", sans-serif;
+  font-weight: bold;
+  font-style: normal;
 }
 span a:before{
   color: #fff;
-  background: black;
+  background-color: #3C3C3C;
   transform: rotateY(0deg) translateZ(25px);
 }
 span a:after{
-  color: black;
+  color: #3C3C3C;
   transform: rotateX(90deg) translateZ(25px);
 }
 span a:hover{
@@ -59,7 +80,7 @@ span a:hover{
 }
 
 .header {
-  color: black;
+  color: #3C3C3C;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.3),
@@ -70,8 +91,9 @@ span a:hover{
   border-radius: 20px;
   border: 0 solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  font-family: "Poppins", sans-serif;
-  font-weight: 900;
+  font-family: "Varela", sans-serif;
+  font-weight: bold;
+  font-style: normal;
   position: relative;
   width: 50%;
   height: 100px;
@@ -80,7 +102,8 @@ span a:hover{
 }
 
 .header:hover {
-  background-color: forestgreen;
+  background-color: #3C3C3C;
+  color: whitesmoke;
 }
 
 .openable {
@@ -110,6 +133,13 @@ span a:hover{
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.5s ease-in-out;
+}
+
+h3{
+  color: #3C3C3C;
+  font-family: "Varela", sans-serif;
+  font-weight: bold;
+  font-style: normal;
 }
 
 .openable .content ul,
@@ -155,14 +185,14 @@ span a:hover{
 }
 
 .main {
-  background-color: peachpuff;
+  background-color: whitesmoke;
   background-size: cover;
   background-position: center;
   min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
+  color: #3C3C3C;
   text-align: center;
   position: relative;
 }
@@ -188,24 +218,28 @@ span a:hover{
 
 .buttons a {
   color: white;
-  background-color: #006400;
+  background-color: #3C3C3C;
   padding: 0.7rem;
   text-decoration: none;
   margin: 0 10px;
   border-radius: 5px;
   transition: background-color 0.5s;
   display: inline-block;
+  font-family: "Varela", sans-serif;
+  font-weight: bold;
+  font-style: normal;
 }
 
 .buttons a:hover {
-  background-color: #004700;
+  background-color: whitesmoke;
+  color: #3C3C3C;
 }
 
 .section {
   padding: 40px 20px;
   min-height: 40vh;
   text-align: center;
-  background-color: #e0f7fa;
+  background-color: whitesmoke;
 }
 
 .section h3 {
@@ -214,7 +248,7 @@ span a:hover{
 }
 
 .section.left {
-  background-color: lightgreen;
+  background-color: whitesmoke;
   text-align: left;
 }
 
@@ -223,6 +257,7 @@ span a:hover{
 }
 
 .features {
+  padding-top: 5vh;
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -230,12 +265,14 @@ span a:hover{
 }
 
 .feature {
-  background-color: #fffbf2;
+  background-color: whitesmoke;
+  border: grey 2px solid;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   width: 300px;
   text-align: left;
+  color: #3C3C3C;
 }
 
 .feature h4 {

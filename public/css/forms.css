@@ -1,11 +1,26 @@
 body {
   /* margin: 0;
   padding: 0; */
-  background-color: #fffbe3;
+  background-color: whitesmoke;
+  font-family: "Varela", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+p{
+  color: #3C3C3C;
+}
+
+h1{
+  color: #3C3C3C;
+}
+
+h4{
+  color: #3C3C3C;
 }
 
 form {
-  background-color: peachpuff;
+  background-color: whitesmoke;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -17,13 +32,13 @@ form {
 input[type="text"],
 textarea {
   padding: 0.5rem;
-  border: 2px solid black;
+  border: 2px solid #3C3C3C;
   border-radius: 10px;
   max-width: 95%;
 }
 
 button[type="submit"] {
-  background-color: #006400;
+  background-color: #3C3C3C;
   color: white;
   border: none;
   border-radius: 10px;
@@ -33,15 +48,15 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: lightgreen;
-  color: black;
+  background-color: whitesmoke;
+  color: #3C3C3C;
 }
 
 .section {
   padding: 40px 20px;
   min-height: 20vh;
   text-align: center;
-  background-color: #e0f7fa;
+  background-color: whitesmoke;
 }
 
 .features {
@@ -52,7 +67,8 @@ button[type="submit"]:hover {
 }
 
 .feature {
-  background-color: #fffbf2;
+  background-color: whitesmoke;
+  border: grey 2px solid;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
