@@ -32,7 +32,7 @@ app.use(session({
 }));
 
 function isLoggedIn(req, res, next) {
-  req.session.user ? next() : res.redirect('pages/login');
+  req.session.user ? next() : res.redirect('/');
 }
 
 
@@ -146,12 +146,9 @@ app.get('/', isLoggedIn, (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('pages/login');
+  res.render('pages/registration');
 });
 
-app.get('/signup', (req, res) => {
-  res.render('pages/signup');
-});
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
@@ -173,7 +170,7 @@ app.post('/signup', async (req, res) => {
   const { username, password } = req.body;
 
   if (users[username]) {
-    res.send('Username already taken');
+    res.send('Username already taken stupid');
   } else {
     const hashedPassword = await bcrypt.hash(password, 10);
     users[username] = { username, password: hashedPassword };
