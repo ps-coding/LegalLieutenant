@@ -17,6 +17,11 @@
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="password" name="password" placeholder="Password" required="">
                 <button>Sign up</button>
+                <% if (isError == true) { %>
+                  <div class="error">
+                      <%= error %>
+                  </div>
+                <% } %>
             </form>
         </div>
 
@@ -26,6 +31,11 @@
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="password" name="password" placeholder="Password" required="">
                 <button>Log in</button>
+                <% if (isError == true) { %>
+                  <div class="error">
+                      <%= error %>
+                  </div>
+                <% } %>
             </form>
         </div>
     </div>
@@ -131,6 +141,12 @@
 
         #chk:checked~.signup label {
             transform: scale(.6);
+        }
+
+        .error {
+            background-color: rgba(255, 0, 0, 0.5);
+            text-align: center;
+            margin-top: 10px;
         }
     </style>
 </body>
