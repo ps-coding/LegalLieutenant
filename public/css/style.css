@@ -51,7 +51,7 @@ html {
 }
 
 .menu li a:hover {
-  color: #d94f5c;
+  color: black;
 }
 
 @keyframes line {
@@ -63,11 +63,10 @@ html {
 footer {
   position: sticky;
   bottom: 0;
-  background-color: #fffdd0;
+  background-color: white;
   padding: 0.25rem;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   text-align: center;
   z-index: 1000;
 }
-
