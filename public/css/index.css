@@ -285,17 +285,18 @@ h3{
 }
 
 
-
+.arrowdiv{
+  position: relative;
+}
 .arrow
 {
-  position: relative;
   width: 40px;
   height: 40px;
   background-size: contain;
 }
 
 .bounce {
-  animation: bounce 2s infinite;
+  animation: bounce 2.5s infinite;
 }
 
 @keyframes bounce {
