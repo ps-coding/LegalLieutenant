@@ -37,7 +37,7 @@ textarea {
   max-width: 95%;
 }
 
-button[type="submit"] {
+button {
   background-color: #3C3C3C;
   color: white;
   border: none;
@@ -45,9 +45,10 @@ button[type="submit"] {
   padding: 0.5rem;
   transition: color 500ms, background-color 500ms;
   cursor: pointer;
+
 }
 
-button[type="submit"]:hover {
+button:hover {
   background-color: whitesmoke;
   color: #3C3C3C;
 }
@@ -82,5 +83,9 @@ button[type="submit"]:hover {
 }
 
 .feature p {
+  text-align: center;
+}
+
+.container{
   text-align: center;
 }
