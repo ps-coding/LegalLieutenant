@@ -12,10 +12,14 @@
   <header><%- include('../partials/navbar'); %></header>
   <main>
     <h1 id="title" data-formname="<%= formName %>"><%= formName %></h1>
-    <button class="btn" onclick="saveDocument()">Save</button>
-    <button class="btn" onclick="download()">Download</button>
+    <br />
+    <button class="btn" onclick="saveDocument()">Save Online</button>
+    <button class="btn" onclick="download()">Download Locally</button>
+    <br />
     <br />
     <button class="btn" onclick="toggleSections()">Toggle View</button>
+    <br />
+    <br />
     <section>
       <h2>Summary View</h2>
       <h3>Hover or tap to see a one-sentence summary of each section.</h3>
