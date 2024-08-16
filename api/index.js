@@ -36,8 +36,8 @@ app.use(
   session({
     store: new FirestoreStore({ database: db }),
     secret: "legal-lieutenant",
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     cookie: { secure: false },
   }),
 );
