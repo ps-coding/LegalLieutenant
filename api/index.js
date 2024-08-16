@@ -170,6 +170,20 @@ function ensureAuthenticated(req, res, next) {
   res.redirect("/login");
 }
 
+function isAlphaNumeric(str) {
+  for (let i = 0; i < str.length; i++) {
+    const code = str.charCodeAt(i);
+    if (
+      !(code > 47 && code < 58) &&
+      !(code > 64 && code < 91) && // upper alpha (A-Z)
+      !(code > 96 && code < 123)
+    ) {
+      return false;
+    }
+  }
+  return true;
+}
+
 app.get("/", (req, res) => {
   res.render("pages/index", { user: req.session.user });
 });
@@ -207,7 +221,7 @@ app.post("/login", async (req, res) => {
     }
   } else {
     res.render("pages/registration", {
-      error: "Incorrect username.",
+      error: `Incorrect username ("${username}" does not exist).`,
       signup: false,
     });
   }
@@ -220,21 +234,28 @@ app.post("/signup", async (req, res) => {
 
   if (userRef.exists) {
     res.render("pages/registration", {
-      error: "That username is already taken.",
+      error: `The username "${username}" is already taken.`,
       signup: true,
     });
   } else {
-    try {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const userJSON = { username, password: hashedPassword };
-      await db.collection("users").doc(username).set(userJSON);
-      req.session.user = userJSON;
-      res.redirect("/");
-    } catch (err) {
+    if (!isAlphaNumeric(username)) {
       res.render("pages/registration", {
-        error: "An error occurred. Please try again.",
+        error: "The username must be alphanumeric (only letters and numbers).",
         signup: true,
       });
+    } else {
+      try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const userJSON = { username, password: hashedPassword };
+        await db.collection("users").doc(username).set(userJSON);
+        req.session.user = userJSON;
+        res.redirect("/");
+      } catch (err) {
+        res.render("pages/registration", {
+          error: "An error occurred. Please try again.",
+          signup: true,
+        });
+      }
     }
   }
 });
