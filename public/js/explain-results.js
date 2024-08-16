@@ -13,7 +13,9 @@ function showSummary(e) {
 
   const computedStyle = getComputedStyle(element);
   elementHeight = element.clientHeight;
-  elementHeight -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
+  elementHeight -=
+    parseFloat(computedStyle.paddingTop) +
+    parseFloat(computedStyle.paddingBottom);
 
   element.style.minHeight = elementHeight + "px";
 
@@ -29,13 +31,13 @@ function hideSummary(e) {
 function toggleSections() {
   const sections = [...document.getElementsByTagName("section")];
   sections.forEach((el) => {
-    el.classList.toggle("hidden")
-  })
+    el.classList.toggle("hidden");
+  });
 }
 
 function defineText() {
   const selection = window.getSelection().toString();
-  const words = selection.split(" ")
+  const words = selection.split(" ");
 
   if (words.length > 1) {
     return;
@@ -48,12 +50,18 @@ function defineText() {
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
-          alert(data[0].meanings.map((val, index) => `${index + 1}. ${val.definitions[0].definition}`).join("\n"))
+          alert(
+            data[0].meanings
+              .map(
+                (val, index) =>
+                  `${index + 1}. ${val.definitions[0].definition}`,
+              )
+              .join("\n"),
+          );
         }
-      })
+      });
   }
 }
 
 document.onmouseup = defineText;
 if (!document.all) document.captureEvents(Event.MOUSEUP);
-

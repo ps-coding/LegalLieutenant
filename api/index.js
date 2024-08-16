@@ -7,15 +7,22 @@ const express = require("express");
 const multer = require("multer");
 const reader = require("any-text");
 const openai = require("openai");
+const bcrypt = require("bcrypt");
+const session = require("express-session");
+const admin = require("firebase-admin");
 
 const app = express();
 const port = process.env["PORT"] || 3000;
 
-const bcrypt = require("bcrypt");
-const session = require("express-session");
-const bodyParser = require("body-parser");
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 
-const users = {};
+if (admin.apps.length === 0) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+}
+
+const db = admin.firestore();
 
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(express.urlencoded({ extended: true }));
@@ -179,14 +186,24 @@ app.get("/signup", (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = users[username];
 
-  if (user && (await bcrypt.compare(password, user.password))) {
-    req.session.user = user;
-    res.redirect("/");
+  const userRef = await db.collection("users").doc(username).get();
+
+  if (userRef.exists) {
+    const user = userRef.data();
+
+    if (await bcrypt.compare(password, user.password)) {
+      req.session.user = user;
+      res.redirect("/");
+    } else {
+      res.render("pages/registration", {
+        error: "Incorrect password.",
+        signup: false,
+      });
+    }
   } else {
     res.render("pages/registration", {
-      error: "Incorrect username or password.",
+      error: "Incorrect username.",
       signup: false,
     });
   }
@@ -195,18 +212,26 @@ app.post("/login", async (req, res) => {
 app.post("/signup", async (req, res) => {
   const { username, password } = req.body;
 
-  if (users[username]) {
+  const userRef = await db.collection("users").doc(username).get();
+
+  if (userRef.exists) {
     res.render("pages/registration", {
       error: "That username is already taken.",
       signup: true,
     });
   } else {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    users[username] = { username, password: hashedPassword };
-
-    const user = users[username];
-    req.session.user = user;
-    res.redirect("/");
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const userJSON = { username, password: hashedPassword };
+      await db.collection("users").doc(username).set(userJSON);
+      req.session.user = userJSON;
+      res.redirect("/");
+    } catch (err) {
+      res.render("pages/registration", {
+        error: "An error occurred. Please try again.",
+        signup: true,
+      });
+    }
   }
 });
 
