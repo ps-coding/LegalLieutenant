@@ -3,26 +3,29 @@ require("dotenv").config();
 const process = require("process");
 const path = require("path");
 const fs = require("fs");
+
 const express = require("express");
+const session = require("express-session");
+const firebase = require("firebase-admin");
+const FirestoreStore = require("firestore-store")(session);
+
 const multer = require("multer");
 const reader = require("any-text");
 const openai = require("openai");
 const bcrypt = require("bcrypt");
-const session = require("express-session");
-const admin = require("firebase-admin");
 
 const app = express();
 const port = process.env["PORT"] || 3000;
 
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 
-if (admin.apps.length === 0) {
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+if (firebase.apps.length === 0) {
+  firebase.initializeApp({
+    credential: firebase.credential.cert(serviceAccount),
   });
 }
 
-const db = admin.firestore();
+const db = firebase.firestore();
 
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(express.urlencoded({ extended: true }));
@@ -31,6 +34,7 @@ app.set("view engine", "ejs");
 
 app.use(
   session({
+    store: new FirestoreStore({ database: db }),
     secret: "legal-lieutenant",
     resave: true,
     saveUninitialized: true,
