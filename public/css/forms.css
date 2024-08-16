@@ -5,17 +5,17 @@ body {
   font-style: normal;
 }
 
-p {
+/* p {
   color: #3c3c3c;
-}
+} */
 
 h1 {
   color: #3c3c3c;
 }
 
-h4 {
+/* h4 {
   color: #3c3c3c;
-}
+} */
 
 form {
   background-color: whitesmoke;
@@ -68,12 +68,19 @@ button:hover {
 
 .feature {
   background-color: whitesmoke;
+  color:#3c3c3c;
   border: grey 2px solid;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   width: 300px;
   text-align: left;
+  transition: background-color 0.5s;
+}
+
+.feature:hover {
+  background-color: #3c3c3c;
+  color: whitesmoke;
 }
 
 .feature h4 {
