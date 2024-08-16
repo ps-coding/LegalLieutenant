@@ -29,9 +29,9 @@
     <form action="/generate-text" method="POST" enctype="multipart/form-data">
       <label for="formName">Document Title:</label>
       <input type="text" id="formName" name="formName" required />
-      <label for="template" style="text-align: center;">Reference Document:
+      <label for="template" style="text-align: center;">Reference Document (optional):
       <br />
-      <small><i><b>This is an advanced feature.</b><br />You can optionally upload a template/sample/information document. This adds a bit more time and one extra step to the generation process, but it is also more accurate and can help you better fine-tune your document.</i></small>
+      <small><i><b>This is an advanced feature.</b><br />You can optionally upload a template/sample/information document.<br />This adds a bit more time and one extra step to the generation process<br />However, it is also more accurate and can help you better fine-tune your document.</i></small>
       </label>
       <input type="file" id="template" name="template" />
       <label for="information">Information (context and/or sample):</label>
