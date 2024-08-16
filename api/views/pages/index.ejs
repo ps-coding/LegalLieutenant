@@ -31,7 +31,9 @@
           <h2>Welcome, <%= user.username %></h2>
           <span><a href="/logout" class="logout" aria-label="log out"></a></span>
         <% } else { %>
-          <span><a href="/login" class="login" aria-label="log in"></a></span>
+          <div>
+            <span><a href="/login" class="login" aria-label="log in"></a></span>
+          </div>
         <% } %>
         <div class="arrowdiv bounce">
           <a href="#howToUse" aria-label="scroll down">
