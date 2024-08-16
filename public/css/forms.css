@@ -1,22 +1,20 @@
 body {
-  /* margin: 0;
-  padding: 0; */
   background-color: whitesmoke;
   font-family: "Varela", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
-p{
-  color: #3C3C3C;
+p {
+  color: #3c3c3c;
 }
 
-h1{
-  color: #3C3C3C;
+h1 {
+  color: #3c3c3c;
 }
 
-h4{
-  color: #3C3C3C;
+h4 {
+  color: #3c3c3c;
 }
 
 form {
@@ -32,25 +30,26 @@ form {
 input[type="text"],
 textarea {
   padding: 0.5rem;
-  border: 2px solid #3C3C3C;
+  border: 2px solid #3c3c3c;
   border-radius: 10px;
   max-width: 95%;
 }
 
 button {
-  background-color: #3C3C3C;
+  background-color: #3c3c3c;
   color: white;
   border: none;
   border-radius: 10px;
   padding: 0.5rem;
-  transition: color 500ms, background-color 500ms;
+  transition:
+    color 500ms,
+    background-color 500ms;
   cursor: pointer;
-
 }
 
 button:hover {
   background-color: whitesmoke;
-  color: #3C3C3C;
+  color: #3c3c3c;
 }
 
 .section {
@@ -86,6 +85,6 @@ button:hover {
   text-align: center;
 }
 
-.container{
+.container {
   text-align: center;
 }

@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: whitesmoke;
 }
@@ -9,7 +13,7 @@ body {
   align-items: flex-start;
 }
 
-img{
+img {
   width: 50vh;
 }
 
@@ -20,67 +24,76 @@ img{
   }
 }
 
-span{
+span {
   position: relative;
   display: inline-flex;
   width: 180px;
   height: 55px;
   perspective: 1000px;
 }
-span a{
+span a {
   font-size: 19px;
   letter-spacing: 1px;
   transform-style: preserve-3d;
   transform: translateZ(-25px);
-  transition: transform .25s;
-  font-family: "Varela", sans-serif;
-  font-weight: bold;
-  font-style: normal;
-  
-}
-
-h4{
+  transition: transform 0.25s;
   font-family: "Varela", sans-serif;
   font-weight: bold;
   font-style: normal;
 }
 
-p{
+h4 {
+  font-family: "Varela", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+}
+
+p {
   font-family: "Varela", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
-span a:before,
-span a:after{
-  position: absolute;
+
+span a.login:before,
+span a.login:after {
+  content: "LOG IN";
+}
+
+span a.logout:before,
+span a.logout:after {
   content: "LOG OUT";
+}
+
+span a:before,
+span a:after {
+  position: absolute;
   height: 55px;
   width: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 5px solid #3C3C3C;
+  border: 5px solid #3c3c3c;
   box-sizing: border-box;
   border-radius: 5px;
   font-family: "Varela", sans-serif;
   font-weight: bold;
   font-style: normal;
 }
-span a:before{
+span a:before {
   color: #fff;
-  background-color: #3C3C3C;
+  background-color: #3c3c3c;
   transform: rotateY(0deg) translateZ(25px);
 }
-span a:after{
-  color: #3C3C3C;
+span a:after {
+  color: #3c3c3c;
   transform: rotateX(90deg) translateZ(25px);
 }
-span a:hover{
+span a:hover {
   transform: translateZ(-25px) rotateX(-90deg);
 }
 
 .header {
-  color: #3C3C3C;
+  color: #3c3c3c;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.3),
@@ -102,7 +115,7 @@ span a:hover{
 }
 
 .header:hover {
-  background-color: #3C3C3C;
+  background-color: #3c3c3c;
   color: whitesmoke;
 }
 
@@ -135,8 +148,8 @@ span a:hover{
   transition: grid-template-rows 0.5s ease-in-out;
 }
 
-h3{
-  color: #3C3C3C;
+h3 {
+  color: #3c3c3c;
   font-family: "Varela", sans-serif;
   font-weight: bold;
   font-style: normal;
@@ -192,7 +205,7 @@ h3{
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #3C3C3C;
+  color: #3c3c3c;
   text-align: center;
   position: relative;
 }
@@ -214,14 +227,22 @@ h3{
 
 .buttons {
   margin: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 415px) {
+  .buttons {
+    align-items: center;
+    flex-direction: column;
+  }
 }
 
 .buttons a {
   color: white;
-  background-color: #3C3C3C;
-  padding: 0.7rem;
+  padding: 0.5rem;
+  background-color: #3c3c3c;
   text-decoration: none;
-  margin: 0 10px;
   border-radius: 5px;
   transition: background-color 0.5s;
   display: inline-block;
@@ -232,7 +253,7 @@ h3{
 
 .buttons a:hover {
   background-color: whitesmoke;
-  color: #3C3C3C;
+  color: #3c3c3c;
 }
 
 .section {
@@ -272,7 +293,7 @@ h3{
   border-radius: 5px;
   width: 300px;
   text-align: left;
-  color: #3C3C3C;
+  color: #3c3c3c;
 }
 
 .feature h4 {
@@ -284,12 +305,11 @@ h3{
   text-align: center;
 }
 
-
-.arrowdiv{
-  position: relative;
+.arrowdiv {
+  margin-top: 30px;
 }
-.arrow
-{
+
+.arrow {
   width: 40px;
   height: 40px;
   background-size: contain;
@@ -300,7 +320,11 @@ h3{
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
   40% {
@@ -309,4 +333,5 @@ h3{
   60% {
     transform: translateY(-15px);
   }
-}  
+}
+

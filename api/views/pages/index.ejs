@@ -20,14 +20,21 @@
           <a href="/explain">Explain Document</a>
           <a href="/generate">Generate Document</a>
         </div>
-        <span><a href="/logout"></a></span>
-      </div>
-      <div class="arrowdiv bounce">
-        <img class="arrow" src="media/downArrow.png">
+        <% if (user) { %>
+          <h2>Welcome, <%= user.username %></h2>
+          <span><a href="/logout" class="logout"></a></span>
+        <% } else { %>
+          <span><a href="/login" class="login"></a></span>
+        <% } %>
+        <div class="arrowdiv bounce">
+          <a href="#howToUse">
+            <img class="arrow" src="media/downArrow.png">
+          </a>
+        </div>
       </div>
     </div>
     <div class="section left">
-      <h3>How To Use</h3>
+      <h3 id="howToUse">How To Use</h3>
 
       <div class="container">
         <div class="openable">

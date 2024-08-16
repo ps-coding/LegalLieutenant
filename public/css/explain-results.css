@@ -1,8 +1,12 @@
-body{
+body {
   font-family: "Varela", sans-serif;
   font-weight: 400;
   font-style: normal;
   background-color: whitesmoke;
+}
+
+main {
+  padding: 1rem;
 }
 
 div {
@@ -10,12 +14,14 @@ div {
   border: 2px solid black;
   border-radius: 10px;
   background-color: whitesmoke;
-  transition: background-color 500ms, color 500ms;
+  transition:
+    background-color 500ms,
+    color 500ms;
   overflow-y: auto;
 }
 
 div:hover {
-  background-color: #3C3C3C;
+  background-color: #3c3c3c;
   color: white;
 }
 
@@ -23,19 +29,15 @@ div:hover {
   display: none;
 }
 
-body {
-  /* margin: 0;
-  padding: 0; */
-  background-color: #fffbe3;
-}
-
 #tgl {
-  background-color: #3C3C3C;
+  background-color: #3c3c3c;
   color: white;
   border: none;
   border-radius: 10px;
   padding: 0.5rem;
-  transition: color 500ms, background-color 500ms;
+  transition:
+    color 500ms,
+    background-color 500ms;
   cursor: pointer;
 }
 

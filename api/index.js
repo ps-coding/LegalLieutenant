@@ -159,12 +159,15 @@ function ensureAuthenticated(req, res, next) {
   res.redirect("/login");
 }
 
-app.get("/", ensureAuthenticated, (req, res) => {
+app.get("/", (req, res) => {
   res.render("pages/index", { user: req.session.user });
 });
 
 app.get("/login", (req, res) => {
-  res.render("pages/registration", { isError: false, error: "" });
+  res.render("pages/registration", {
+    error: "",
+    signup: false,
+  });
 });
 
 app.post("/login", async (req, res) => {
@@ -176,8 +179,8 @@ app.post("/login", async (req, res) => {
     res.redirect("/");
   } else {
     res.render("pages/registration", {
-      isError: true,
       error: "Incorrect username or password.",
+      signup: false,
     });
   }
 });
@@ -187,13 +190,16 @@ app.post("/signup", async (req, res) => {
 
   if (users[username]) {
     res.render("pages/registration", {
-      isError: true,
       error: "That username is already taken.",
+      signup: true,
     });
   } else {
     const hashedPassword = await bcrypt.hash(password, 10);
     users[username] = { username, password: hashedPassword };
-    res.redirect("/login");
+
+    const user = users[username];
+    req.session.user = user;
+    res.redirect("/");
   }
 });
 
@@ -203,38 +209,43 @@ app.get("/logout", (req, res) => {
       return res.redirect("/");
     }
     res.clearCookie("connect.sid");
-    res.redirect("/login");
+    res.redirect("/");
   });
 });
 
-app.get("/explain", (_, res) => {
+app.get("/explain", ensureAuthenticated, (_, res) => {
   res.render("pages/explain-upload");
 });
 
-app.get("/generate", (_, res) => {
+app.get("/generate", ensureAuthenticated, (_, res) => {
   res.render("pages/generate-upload");
 });
 
-app.post("/explain-file", upload.single("file"), async (req, res) => {
-  if (req.file) {
-    const documentContent = await reader.getText(req.file.path);
-    const groupedSections = groupSections(documentContent);
-    const sections = await Promise.all(
-      groupedSections.map(async (section) => ({
-        content: section,
-        summary: await summarize(section),
-      })),
-    );
-    fs.unlink(req.file.path, (err) => {
-      if (err) console.error(err);
-    });
-    res.render("pages/explain-results", { sections, documentContent });
-  } else {
-    res.redirect("/explain");
-  }
-});
+app.post(
+  "/explain-file",
+  ensureAuthenticated,
+  upload.single("file"),
+  async (req, res) => {
+    if (req.file) {
+      const documentContent = await reader.getText(req.file.path);
+      const groupedSections = groupSections(documentContent);
+      const sections = await Promise.all(
+        groupedSections.map(async (section) => ({
+          content: section,
+          summary: await summarize(section),
+        })),
+      );
+      fs.unlink(req.file.path, (err) => {
+        if (err) console.error(err);
+      });
+      res.render("pages/explain-results", { sections, documentContent });
+    } else {
+      res.redirect("/explain");
+    }
+  },
+);
 
-app.post("/explain-text", async (req, res) => {
+app.post("/explain-text", ensureAuthenticated, async (req, res) => {
   const documentContent = req.body.documentContent;
   const groupedSections = groupSections(documentContent);
   const sections = await Promise.all(
@@ -248,31 +259,36 @@ app.post("/explain-text", async (req, res) => {
     .render("pages/explain-results", { sections, documentContent });
 });
 
-app.post("/generate-text", upload.single("template"), async (req, res) => {
-  const formName = req.body.formName.trim();
-  const information = req.body.information.trim();
+app.post(
+  "/generate-text",
+  ensureAuthenticated,
+  upload.single("template"),
+  async (req, res) => {
+    const formName = req.body.formName.trim();
+    const information = req.body.information.trim();
 
-  if (req.file) {
-    const scan = await reader.getText(req.file.path);
-    const template = await outline(formName, scan);
-    const additionalQuestions = await additionalInformation(
-      formName,
-      information,
-      template,
-    );
-    res.render("pages/generate-confirm-information", {
-      formName,
-      template,
-      information,
-      additionalQuestions,
-    });
-  } else {
-    const documentContent = await create(formName, information);
-    res.render("pages/generate-results", { documentContent });
-  }
-});
+    if (req.file) {
+      const scan = await reader.getText(req.file.path);
+      const template = await outline(formName, scan);
+      const additionalQuestions = await additionalInformation(
+        formName,
+        information,
+        template,
+      );
+      res.render("pages/generate-confirm-information", {
+        formName,
+        template,
+        information,
+        additionalQuestions,
+      });
+    } else {
+      const documentContent = await create(formName, information);
+      res.render("pages/generate-results", { documentContent });
+    }
+  },
+);
 
-app.post("/generate-with-outline", async (req, res) => {
+app.post("/generate-with-outline", ensureAuthenticated, async (req, res) => {
   const formName = req.body.formName.trim();
   const information = req.body.information.trim();
   const template = req.body.template.trim();
