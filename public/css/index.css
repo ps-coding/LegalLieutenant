@@ -6,6 +6,10 @@ body {
   background-color: whitesmoke;
 }
 
+h2 {
+  font-size: 2rem;
+}
+
 .container {
   display: flex;
   text-align: center;
@@ -124,11 +128,12 @@ span a:hover {
 }
 
 .openable {
-  width: 75%;
+  width: 100%;
   margin-bottom: 2%;
 }
 
 .openable button {
+  width: 100%;
   cursor: pointer;
 }
 
@@ -213,11 +218,6 @@ h3 {
 .main-content {
   position: relative;
   z-index: 1;
-}
-
-.main h2 {
-  margin: 0;
-  font-size: 4em;
 }
 
 .main p {
@@ -338,4 +338,3 @@ h3 {
     transform: translateY(-15px);
   }
 }
-

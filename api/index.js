@@ -170,6 +170,13 @@ app.get("/login", (req, res) => {
   });
 });
 
+app.get("/signup", (req, res) => {
+  res.render("pages/registration", {
+    error: "",
+    signup: true,
+  });
+});
+
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const user = users[username];
