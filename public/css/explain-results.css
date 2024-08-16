@@ -9,7 +9,7 @@ main {
   padding: 1rem;
 }
 
-div {
+div.cs {
   padding: 1rem;
   border: 2px solid black;
   border-radius: 10px;
@@ -20,7 +20,7 @@ div {
   overflow-y: auto;
 }
 
-div:hover {
+div.cs:hover {
   background-color: #3c3c3c;
   color: white;
 }
@@ -29,7 +29,7 @@ div:hover {
   display: none;
 }
 
-#tgl {
+.btn {
   background-color: #3c3c3c;
   color: white;
   border: none;

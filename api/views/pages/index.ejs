@@ -4,14 +4,18 @@
 <head>
     <%- include('../partials/head', {title: undefined}); %>
     <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/accordion.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Varela&display=swap" rel="stylesheet">
+    <script src="/js/accordion.js" defer></script>
 </head>
 
 <body>
-  <header><%- include('../partials/navbar'); %></header>
+  <% if (user) { %>
+    <header><%- include('../partials/navbar'); %></header>
+  <% } %>
   <main>
     <div class="main">
       <div class="main-content">
@@ -19,11 +23,11 @@
             <source media="(min-width: 400px)" srcset="media/logo.png">
             <img src="media/logo_small.png" alt="Legal Lieutenant">
         </picture>
-        <div class="buttons">
-          <a href="/explain">Explain Document</a>
-          <a href="/generate">Generate Document</a>
-        </div>
         <% if (user) { %>
+          <div class="buttons">
+            <a href="/explain">Explain Document</a>
+            <a href="/generate">Generate Document</a>
+          </div>
           <h2>Welcome, <%= user.username %></h2>
           <span><a href="/logout" class="logout" aria-label="log out"></a></span>
         <% } else { %>
@@ -137,17 +141,6 @@
         </div>
       </div>
   </main>
-
-  <script>
-    function openOpenable(e) {
-      e.parentElement.classList.toggle("open");
-      if (e.parentElement.classList.contains("open")) {
-        e.innerHTML = e.innerHTML.replace("▼", "▲");
-      } else {
-        e.innerHTML = e.innerHTML.replace("▲", "▼");
-      }
-    }
-  </script>
   <footer>
     <%- include('../partials/footer'); %>
   </footer>

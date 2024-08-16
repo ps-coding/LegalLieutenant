@@ -4,27 +4,32 @@
 <head>
     <%- include('../partials/head', {title: "Explain Results"}); %>
     <link rel="stylesheet" href="/css/explain-results.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script src="/js/explain-results.js" defer></script>
 </head>
 
 <body>
   <header><%- include('../partials/navbar'); %></header>
   <main>
-    <button id="tgl" onclick="toggleSections()">Toggle View</button>
+    <h1 id="title" data-formname="<%= formName %>"><%= formName %></h1>
+    <button class="btn" onclick="saveDocument()">Save</button>
+    <button class="btn" onclick="download()">Download</button>
+    <br />
+    <button class="btn" onclick="toggleSections()">Toggle View</button>
     <section>
-      <h1>Summary View</h1>
-      <h2>Hover to see a one-sentence summary of each section.</h2>
+      <h2>Summary View</h2>
+      <h3>Hover or tap to see a one-sentence summary of each section.</h3>
       <% sections.forEach(function(section) { %>
-        <div data-content="<%= section.content %>" data-summary="<%= section.summary %>"
+        <div class="cs" data-content="<%= section.content %>" data-summary="<%= section.summary %>"
           onmouseenter="showSummary(event)" onmouseout="hideSummary(event)">
           <%= section.content %>
         </div>
         <% }); %>
     </section>
     <section class="hidden">
-      <h1>Raw Document View</h1>
-      <h2>Highlight any word to see its definition.</h2>
-      <p data-content="<%= documentContent %>">
+      <h2>Raw Document View</h2>
+      <h3>Highlight any word to see its definition.</h3>
+      <p id="content" data-content="<%= documentContent %>">
         <%= documentContent %>
       </p>
     </section>
@@ -33,3 +38,5 @@
     <%- include('../partials/footer'); %>
   </footer>
 </body>
+
+</html>

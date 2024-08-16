@@ -27,6 +27,7 @@ if (firebase.apps.length === 0) {
 
 const db = firebase.firestore();
 
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(express.urlencoded({ extended: true }));
 app.set("views", path.join(__dirname, "views"));
@@ -64,13 +65,12 @@ const groupSections = (documentContent) => {
       /^((\s*\**\s*(((Part)|(Article)|(Section)|(Preamble)|(Clauses)|(Definitions)|(Clause)|(Definition))\.?\s*((([0-9]+)|([IVXLCDM]+)|([A-Z]+))\.?)?\s*(((:)|(-)|(–)|(—))+\s*.{0,35})?)\**\s*(\r?\n)+)+)/gim,
       "[;break;]$1",
     )
-    .replaceAll("\n", " ")
     .split("[;break;]");
 
   if (splitSections.length == 1) {
     splitSections = splitSections[0]
-      .replaceAll(/([\.\?!])/g, "$1\n")
-      .split("\n");
+      .replaceAll(/([\.\?!])/g, "$1[;break;]")
+      .split("[;break;]");
 
     const result = [splitSections[0]];
     for (let i = 1; i < splitSections.length; i++) {
@@ -93,12 +93,12 @@ const groupSections = (documentContent) => {
   return groupedSections;
 };
 
-const summarize = async (section) => {
+const summarize = async (formName, section) => {
   const params = {
     messages: [
       {
         role: "user",
-        content: `Summarize the following section from a legal document in one simple and concise sentence. If applicable, add one or two simple sentences about important clarifications for the reader/author. If applicable, also include potential loopholes, pitfalls, or issues relating to this section. Here is the section:\n${section}`,
+        content: `Summarize the following section from a legal document (the ${formName}) in one simple and concise sentence. If applicable, add one or two simple sentences about important clarifications for the reader/author. If applicable, also include potential loopholes, pitfalls, or issues relating to this section. Here is the section:\n${section}`,
       },
     ],
     model: "gpt-4o-mini",
@@ -278,6 +278,69 @@ app.get("/generate", ensureAuthenticated, (_, res) => {
   res.render("pages/generate-upload");
 });
 
+app.get("/documents", ensureAuthenticated, async (req, res) => {
+  const username = req.session.user.username;
+  const documentsRef = db.collection("documents");
+
+  try {
+    const userDocuments = await documentsRef
+      .where("author", "==", username)
+      .get();
+
+    const documents = userDocuments.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    res.render("pages/documents", { documents });
+  } catch (err) {
+    res.redirect("/");
+  }
+});
+
+app.delete("/documents/:id", ensureAuthenticated, async (req, res) => {
+  const username = req.session.user.username;
+  const id = req.params.id;
+
+  try {
+    const documentRef = await db.collection("documents").doc(id).get();
+
+    if (documentRef.exists && documentRef.data().author == username) {
+      await db.collection("documents").doc(id).delete();
+
+      res.status(204).send();
+    } else {
+      res.status(403).send();
+    }
+  } catch (err) {
+    res.status(500).send();
+  }
+});
+
+app.post("/documents", ensureAuthenticated, async (req, res) => {
+  const { title, content } = req.body;
+  const author = req.session.user.username;
+  try {
+    await db.collection("documents").add({ title, content, author });
+    res.status(201).send();
+  } catch (err) {
+    res.status(500).send();
+  }
+});
+
+app.get("/define/:word", async (req, res) => {
+  const word = req.params.word;
+  try {
+    const response = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
+    );
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.json({ error: "An error occurred." });
+  }
+});
+
 app.post(
   "/explain-file",
   ensureAuthenticated,
@@ -285,18 +348,23 @@ app.post(
   async (req, res) => {
     if (req.file) {
       try {
-        const documentContent = await reader.getText(req.file.path);
+        const formName = req.body.formName.trim();
+        const documentContent = (await reader.getText(req.file.path)).trim();
         const groupedSections = groupSections(documentContent);
         const sections = await Promise.all(
           groupedSections.map(async (section) => ({
             content: section,
-            summary: await summarize(section),
+            summary: await summarize(formName, section),
           })),
         );
         fs.unlink(req.file.path, (err) => {
           if (err) console.error(err);
         });
-        res.render("pages/explain-results", { sections, documentContent });
+        res.render("pages/explain-results", {
+          formName,
+          sections,
+          documentContent,
+        });
       } catch (err) {
         res.redirect("/explain");
       }
@@ -307,17 +375,20 @@ app.post(
 );
 
 app.post("/explain-text", ensureAuthenticated, async (req, res) => {
-  const documentContent = req.body.documentContent;
+  const formName = req.body.formName.trim();
+  const documentContent = req.body.documentContent.trim();
   const groupedSections = groupSections(documentContent);
   const sections = await Promise.all(
     groupedSections.map(async (section) => ({
       content: section,
-      summary: await summarize(section),
+      summary: await summarize(formName, section),
     })),
   );
-  res
-    .status(201)
-    .render("pages/explain-results", { sections, documentContent });
+  res.status(201).render("pages/explain-results", {
+    formName,
+    sections,
+    documentContent,
+  });
 });
 
 app.post(
@@ -344,7 +415,10 @@ app.post(
       });
     } else {
       const documentContent = await create(formName, information);
-      res.render("pages/generate-results", { documentContent });
+      res.render("pages/generate-results", {
+        formName,
+        documentContent,
+      });
     }
   },
 );
@@ -359,7 +433,7 @@ app.post("/generate-with-outline", ensureAuthenticated, async (req, res) => {
     information,
     template,
   );
-  res.render("pages/generate-results", { documentContent });
+  res.render("pages/generate-results", { formName, documentContent });
 });
 
 app.listen(port, () => {

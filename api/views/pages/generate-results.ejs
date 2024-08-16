@@ -10,7 +10,10 @@
 <body>
   <header><%- include('../partials/navbar'); %></header>
   <main>
+    <h1><%= formName %></h1>
     <form action="/explain-text" method="POST">
+      <label for="formName">Document Title:</label>
+      <input type="text" id="formName" name="formName" value="<%= formName %>" required />
       <label for="documentContent">Document Draft (edit as needed):</label>
       <textarea rows="25" cols="80" id="documentContent" name="documentContent" data-content="<%= documentContent %>"
         required>
@@ -18,11 +21,10 @@
       </textarea>
       <button type="submit">Explain Generated Document</button>
     </form>
-    <div class = "container">
-      <button id="downloadButton">Download as .txt</button>
-    </div>
   </main>
   <footer>
     <%- include('../partials/footer'); %>
   </footer>
 </body>
+
+</html>

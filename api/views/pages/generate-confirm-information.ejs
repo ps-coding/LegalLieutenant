@@ -12,14 +12,16 @@
   <main>
     <h1>Confirm Information</h1>
     <form action="/generate-with-outline" method="POST">
-      <label for="formName">Form Name:</label>
+      <label for="formName">Document Title:</label>
       <input type="text" id="formName" name="formName" value="<%= formName %>" required />
       <label for="template">Generic Outline (based on the provided sample/template/information document, edit as needed):</label>
       <textarea id="template" name="template" rows="25" cols="80" data-content="<%= template %>" required><%= template %></textarea>
       <label for="information">Information (context and/or sample):
         <br />
+        <small>
         Additional Information Suggestion:
         <p data-content="<%= additionalQuestions %>"><%= additionalQuestions %></p>
+        </small>
       </label>
       <textarea id="information" name="information" rows="25" cols="80" data-content="<%= information %>" required><%= information %></textarea>
       <button type="submit">Generate Text Document</button>

@@ -25,11 +25,16 @@
         </div>
       </div>
     </div>
+    <h1>Explain Document</h1>
     <form style="border-bottom: 2px solid black;" action="/explain-file" method="POST" enctype="multipart/form-data">
+      <label for="formName">Document Title:</label>
+      <input type="text" id="formName" name="formName" required />
       <input type="file" id="file" name="file" required />
       <button type="submit">Explain File Document</button>
     </form>
     <form action="/explain-text" method="POST">
+      <label for="formName">Document Title:</label>
+      <input type="text" id="formName" name="formName" required />
       <label for="documentContent">Insert Text Document:</label>
       <textarea id="documentContent" name="documentContent" rows="25" cols="80" required></textarea>
       <button type="submit">Explain Text Document</button>

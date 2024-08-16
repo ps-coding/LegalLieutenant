@@ -1,0 +1,11 @@
+main {
+  padding: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.nobg {
+  background-color: transparent;
+}

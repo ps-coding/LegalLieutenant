@@ -1,12 +1,15 @@
+let lastSelection = "";
+
 const divs = [...document.getElementsByTagName("div")];
 divs.forEach((el) => {
   el.innerText = el.dataset.content;
 });
 
-const paragraphs = [...document.getElementsByTagName("p")];
-paragraphs.forEach((el) => {
-  el.innerText = el.dataset.content;
-});
+const titleH = document.getElementById("title");
+titleH.innerText = titleH.dataset.formname;
+
+const contentP = document.getElementById("content");
+contentP.innerText = contentP.dataset.content;
 
 function showSummary(e) {
   const element = e.target;
@@ -37,6 +40,13 @@ function toggleSections() {
 
 function defineText() {
   const selection = window.getSelection().toString();
+
+  if (selection === lastSelection) {
+    return;
+  }
+
+  lastSelection = selection;
+
   const words = selection.split(" ");
 
   if (words.length > 1) {
@@ -46,21 +56,79 @@ function defineText() {
   const word = words[0];
 
   if (word) {
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          alert(
-            data[0].meanings
-              .map(
-                (val, index) =>
-                  `${index + 1}. ${val.definitions[0].definition}`,
-              )
-              .join("\n"),
-          );
-        }
-      });
+    try {
+      fetch(`/define/${word.trim().toLowerCase()}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            return;
+          }
+          if (Array.isArray(data)) {
+            Swal.fire({
+              title: word.trim().toLowerCase(),
+              html: data[0].meanings
+                .map(
+                  (val, index) =>
+                    `${index + 1}. ${val.definitions[0].definition}`,
+                )
+                .join("<br />"),
+              icon: "info",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#3c3c3c",
+            });
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
+}
+
+function saveDocument() {
+  const titleH = document.getElementById("title");
+  const contentP = document.getElementById("content");
+  const title = titleH.dataset.formname;
+  const content = contentP.dataset.content;
+
+  fetch("/documents", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ title, content }),
+  }).then((res) => {
+    if (!res.ok) {
+      Swal.fire({
+        title: "Error",
+        text: "An error occurred while saving the document",
+        icon: "error",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#3c3c3c",
+      });
+    } else {
+      Swal.fire({
+        title: "Document Saved",
+        text: "Document has been saved successfully",
+        icon: "success",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#3c3c3c",
+      });
+    }
+  });
+}
+
+function download() {
+  const text = contentP.dataset.content;
+
+  const blob = new Blob([text], { type: "text/plain" });
+
+  const link = document.createElement("a");
+
+  link.href = URL.createObjectURL(blob);
+  link.download = "download.txt";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 document.onmouseup = defineText;
