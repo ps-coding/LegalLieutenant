@@ -234,18 +234,22 @@ app.post(
   upload.single("file"),
   async (req, res) => {
     if (req.file) {
-      const documentContent = await reader.getText(req.file.path);
-      const groupedSections = groupSections(documentContent);
-      const sections = await Promise.all(
-        groupedSections.map(async (section) => ({
-          content: section,
-          summary: await summarize(section),
-        })),
-      );
-      fs.unlink(req.file.path, (err) => {
-        if (err) console.error(err);
-      });
-      res.render("pages/explain-results", { sections, documentContent });
+      try {
+        const documentContent = await reader.getText(req.file.path);
+        const groupedSections = groupSections(documentContent);
+        const sections = await Promise.all(
+          groupedSections.map(async (section) => ({
+            content: section,
+            summary: await summarize(section),
+          })),
+        );
+        fs.unlink(req.file.path, (err) => {
+          if (err) console.error(err);
+        });
+        res.render("pages/explain-results", { sections, documentContent });
+      } catch (err) {
+        res.redirect("/explain");
+      }
     } else {
       res.redirect("/explain");
     }
