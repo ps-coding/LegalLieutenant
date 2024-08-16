@@ -9,7 +9,7 @@ body {
   background: linear-gradient(to bottom, #fff5ee, whitesmoke, #fff5ee);
 }
 
-.main {
+main {
   width: 350px;
   height: 500px;
   background: red;
