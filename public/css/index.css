@@ -7,6 +7,7 @@ body {
 }
 
 h2 {
+  margin-top: 60px;
   font-size: 2rem;
 }
 
@@ -29,6 +30,7 @@ img {
 }
 
 span {
+  margin-top: 20px;
   position: relative;
   display: inline-flex;
   width: 180px;
@@ -229,6 +231,7 @@ h3 {
   margin: 1rem;
   display: flex;
   gap: 1rem;
+  justify-content: center;
 }
 
 @media screen and (max-width: 415px) {
@@ -310,7 +313,7 @@ h3 {
 }
 
 .arrowdiv {
-  margin-top: 30px;
+  margin-top: 100px;
 }
 
 .arrow {
@@ -332,9 +335,9 @@ h3 {
     transform: translateY(0);
   }
   40% {
-    transform: translateY(-30px);
+    transform: translateY(-45px);
   }
   60% {
-    transform: translateY(-15px);
+    transform: translateY(-20px);
   }
 }
