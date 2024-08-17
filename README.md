@@ -23,7 +23,7 @@ The inspiration for this project stemmed from our personal experiences as first-
 - **Overall,** our application is run through an express.js server. We use EJS as the view engine so that we can dynamically populate the page using the response from the server before the page reaches the client. This way, the contents of the page are accurate the moment that it arrives (i.e., no client-side JavaScript is required for the initial rendering, unlike in vanilla React or Angular). This rendering method significantly enhances our site's performance, as evidenced by our [perfect Lighthouse score](https://pagespeed.web.dev/analysis/https-legal-lieutenant-vercel-app/9bcmh6aaaj?form_factor=desktop). The EJS template engine also allows the use of “partial” templates, which we use for our head, navbar, and footer. We use multiple CSS style sheets and multiple JavaScript files based on what each page needs. Common styles for the navigation bar and footer are in a core CSS file, form styling is in a form CSS file that is imported in all pages that use forms, the accordion CSS and JS files are independently imported only on pages that use our custom accordion, etc. Client-side JavaScript is used for several features like text replacement on hover and dynamic size adjustments. We also use asynchronous JavaScript to power our “highlight to define” feature by using fetch on a dictionary API. We also use JavaScript to initiate our fancy modals, which are powered by SweetAlert2. Overall, we have developed a very performant site by using server-side rendering and by chunking our CSS and JS files based on what different pages need (which also reduces code repetition).
 - **For the summarize feature,** we use OpenAI’s GPT-4o-mini model. The model is fast, cheap, and intelligent enough for our purposes. The user uploads their file to our server – which we handle using the multer package – and then the contents of the file (PDF, DOC, DOCX, etc.) are read using the any-text package. The uploaded file is then marked to be asynchronously deleted to save space, but the text is preserved in a variable. We then break up the text of the document into smaller sections based on common legal section dividers (e.g., "part x," "section x," "article x," "preamble," "definitions," etc.) using a complex and thorough regular expression that allows for various formatting differences (e.g., different types of numerals after different identifiers) yet is still accurate. Each chunked section starts with the section identifier from the document (e.g., "Part 3" or Section IV"), which is followed by the content. If two identifiers are used one immediately after another, they are placed at the top of the same section block to keep things neat. If this section-indentifier-based division method does not work for any reason (e.g., poor document formatting), we fall back to chunking based on word count, ensuring that sentences are not split. Overall, our chunking strategies enable each section of the document to get its own summary and its own description of common pitfalls, which is much more useful than a vague overall summary as it can target specific problematic points. By providing smaller sections of the document to the AI model at a time, we are able to produce more accurate and relevant results.
 - **For the generate feature,** we pass the document title and any accompanying user-provided information to the AI model. Because of OpenAI’s safeguards, we engineered the prompt to clarify that this is only a draft and that it will be manually reviewed later; otherwise, the model refused to generate anything. The resulting document is displayed in a results page, where the user can edit the contents of the document if they want to. Afterward, they can click one button to send their newly generated document off to the summarize page to better understand what the AI created piece by piece.
-  - **In case the user has a template/information file they would like to use as the basis for the generation,** we have added the ability for the user to upload a custom template/sample/information document to provide a specific structure for the generated document. If they upload a file, the steps are slightly different. Because it takes too much time and is often ineffective to both analyze the provided document and generate a new one all in one request, we break it up. First, the template document is processed, and an outline is created using AI (we use any-text to scan the document before passing it off to GPT-4o-mini to create the outline). Then, in another prompt, we feed the AI model the newly created outline and the user's provided information and ask it to output a friendly request asking the user for specific pieces of additional information that would be helpful in generating the document. After this initial processing is done, the user is presented a page that still has the document title and the personal information that they entered. However, the page now also has an outline box that contains the AI-generated outline, which they can edit. The page also includes the AI-generated prompt asking for specific pieces of additional information. The more information the user enters, the more complete the final document will be, but everything is up to the user. Once the user confirms the format of the outline and their information, the document is fully generated on the server, and the user is taken to the generate results page (the same page they would normally go to if they did not upload a template). As generating a document based on a template is a lot more computationally intensive, involves a lot more steps, and takes a bit longer than the standard generate feature, we warn the user that it will take longer and that this feature is often unnecessary. However, uploading a file as a template does provide a much more accurate result, which we also note on the generate page. Overall, we provide flexibility: the user can decide for themselves whether they want to prioritize speed or accuracy.
+    - **In case the user has a template/information file they would like to use as the basis for the generation,** we have added the ability for the user to upload a custom template/sample/information document to provide a specific structure for the generated document. If they upload a file, the steps are slightly different. Because it takes too much time and is often ineffective to both analyze the provided document and generate a new one all in one request, we break it up. First, the template document is processed, and an outline is created using AI (we use any-text to scan the document before passing it off to GPT-4o-mini to create the outline). Then, in another prompt, we feed the AI model the newly created outline and the user's provided information and ask it to output a friendly request asking the user for specific pieces of additional information that would be helpful in generating the document. After this initial processing is done, the user is presented a page that still has the document title and the personal information that they entered. However, the page now also has an outline box that contains the AI-generated outline, which they can edit. The page also includes the AI-generated prompt asking for specific pieces of additional information. The more information the user enters, the more complete the final document will be, but everything is up to the user. Once the user confirms the format of the outline and their information, the document is fully generated on the server, and the user is taken to the generate results page (the same page they would normally go to if they did not upload a template). As generating a document based on a template is a lot more computationally intensive, involves a lot more steps, and takes a bit longer than the standard generate feature, we warn the user that it will take longer and that this feature is often unnecessary. However, uploading a file as a template does provide a much more accurate result, which we also note on the generate page. Overall, we provide flexibility: the user can decide for themselves whether they want to prioritize speed or accuracy.
 - **For our custom-built authentication and document-access feature,** we use hashing and salting to make user passwords verifiable yet unrecognizable. If a hacker got their hands on all of our user data, they would still never be able to find out any user's password, and they would thus not be able to access any user's account. We store all user data in a Firebase database. We researched a variety of different options like PostgreSQL, MySQL, and MongoDB. In the end, we decided to use Firebase as it is free to get started with, provides in-depth information for developers, has a great API, and offers state-of-the-art security tools. In Firebase, we blocked all read and write access to all data except through the admin SDK with a special API key, which only our express.js server has. In our Firestore database, we have created three collections: users, sessions, and documents. The users collection stores the username and hashed/salted password of each user. The sessions collection stores session/cookie data so that users do not have to sign in each time they visit our page (we make sure to delete sessions when the user signs out and only create sessions once the user signs in to save space and make things more secure; only the server can edit the actual session data like the authentication status to prevent any malicious attacks). Lastly, the documents collection in our Firestore database stores the saved documents of each user. The only way to access documents is through our API, so we are able to make certain that only users who created a document can access or delete it. By tightly integrating the document-access feature with the rest of our website, we enable the user to quickly access explanations of their documents through the click of a button.
 
 ## Challenges We Ran Into
@@ -54,21 +54,21 @@ stored in a database. In order to do this, we hash/salt passwords with bcrypt an
 
 ## File Structure
 - `api/` - API folder
-  - `index.js` - Express server
-  - `views/` - EJS files
-    - `pages/` - Pages
-    - `partials/` - Templates (head, navbar, footer)
+    - `index.js` - Express server
+    - `views/` - EJS files
+        - `pages/` - Pages
+        - `partials/` - Templates (head, navbar, footer)
 - `public/` - Resources
-  - `css/` - CSS files
-  - `js/` - JavaScript files
-  - `media/` - Images, icons, and manifests
+    - `css/` - CSS files
+    - `js/` - JavaScript files
+    - `media/` - Images, icons, and manifests
 
 ## Local Setup
 - Clone the respository
 - Run `npm install`
 - Set up a `.env` file
-  - Add your own `OPENAI_API_KEY` to a `.env` file
-  - Add your own `FIREBASE_SERVICE_ACCOUNT_KEY` to the `.env` file
+    - Add your own `OPENAI_API_KEY` to a `.env` file
+    - Add your own `FIREBASE_SERVICE_ACCOUNT_KEY` to the `.env` file
 - Run `node .` in the root directory
 - Open `localhost:3000` to preview the application
 
@@ -82,39 +82,39 @@ Visit the [public site](https://legal-lieutenant.vercel.app/).
 - Once the explain results screen loads, hover over any section to see a section summary and potential concerning areas
 - Press the toggle button to switch between the summary and raw-text views
 - In the raw-text view, highlight or double-click on a word to see its definition
-  - The definition will appear in a pop-up
-  - You must have one and only one word selected; otherwise, we will assume that you are just trying to copy a part of the document
+    - The definition will appear in a pop-up
+    - You must have one and only one word selected; otherwise, we will assume that you are just trying to copy a part of the document
 - Download a document or save it to your account using the buttons at the top of the page
 
 ### Generate Page
 - Provide the document title
-  - If you don't know the specific title, provide the document category, such as "immigration papers," and the document will be inferred
+    - If you don't know the specific title, provide the document category, such as "immigration papers," and the document will be inferred
 - If you have a sample/template/information document to upload:
-  - Upload the document
-  - Provide additional information about your situation and/or the document
-  - Press submit
-  - A new screen will be presented with an outline generated based on your uploaded document and a prompt asking for more information
-  - At the bottom of the page, there is an option to download the generated document to your local storage as a .txt file.
-  - Edit the outline and provide more information if needed (if you do not provide certain pieces of information, the corresponding sections will be left blank in the generated document)
-  - Press submit
+    - Upload the document
+    - Provide additional information about your situation and/or the document
+    - Press submit
+    - A new screen will be presented with an outline generated based on your uploaded document and a prompt asking for more information
+    - At the bottom of the page, there is an option to download the generated document to your local storage as a .txt file.
+    - Edit the outline and provide more information if needed (if you do not provide certain pieces of information, the corresponding sections will be left blank in the generated document)
+    - Press submit
 - Otherwise, if you do not have a sample/template/information document to upload:
-  - Provide all applicable information about your situation, and include as much information about the document itself as possible
-  - Press submit
+    - Provide all applicable information about your situation, and include as much information about the document itself as possible
+    - Press submit
 - Once the generate results screen loads, edit the document as desired
-  - Blanks will be present where the AI model did not have enough information to fill something, so make sure to fill in those parts carefully
-  - Press submit
+    - Blanks will be present where the AI model did not have enough information to fill something, so make sure to fill in those parts carefully
+    - Press submit
 - The explain results page screen will then appear with the generated document already populated
 
 ## Contribution Guidelines
 - Open an issue with the following:
-  - Description of the problem or feature request
-  - Explanation of who the issue impacts and why it is important
-  - Steps to reproduce (if applicable)
+    - Description of the problem or feature request
+    - Explanation of who the issue impacts and why it is important
+    - Steps to reproduce (if applicable)
 - If you are willing to take on the issue, follow the steps [here](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project)
-  1. Fork the respository and clone the fork
-  1. Create a new feature branch
-  1. Make your changes locally
-  1. Push your local commits to the fork
-  1. Create a pull request
+    1. Fork the respository and clone the fork
+    1. Create a new feature branch
+    1. Make your changes locally
+    1. Push your local commits to the fork
+    1. Create a pull request
 - After the core contributors review your edits, we will leave feedback or accept the request
-  - Please do not be offended or concerned if your pull request is not immediately merged, and be willing to engage in kind, open discussion
+    - Please do not be offended or concerned if your pull request is not immediately merged, and be willing to engage in kind, open discussion
