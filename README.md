@@ -61,6 +61,7 @@ stored in a database. In order to do this, we hash/salt passwords with bcrypt an
 - `public` - Resources
   - `css` - CSS files
   - `js` - JavaScript files
+  - `media` - Images, icons, and manifests
 
 ## Local Setup
 - Clone the respository
