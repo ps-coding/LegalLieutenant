@@ -56,12 +56,12 @@ stored in a database. In order to do this, we hash/salt passwords with bcrypt an
 - `api/` - API folder
   - `index.js` - Express server
   - `views/` - EJS files
-    - `pages` - Pages
-    - `partials` - Templates (head, navbar, footer)
-- `public` - Resources
-  - `css` - CSS files
-  - `js` - JavaScript files
-  - `media` - Images, icons, and manifests
+    - `pages/` - Pages
+    - `partials/` - Templates (head, navbar, footer)
+- `public/` - Resources
+  - `css/` - CSS files
+  - `js/` - JavaScript files
+  - `media/` - Images, icons, and manifests
 
 ## Local Setup
 - Clone the respository
