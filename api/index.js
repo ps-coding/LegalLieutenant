@@ -305,6 +305,37 @@ app.get("/documents", ensureAuthenticated, async (req, res) => {
   }
 });
 
+app.post("/documents", ensureAuthenticated, async (req, res) => {
+  const { title, content } = req.body;
+  const author = req.session.user.username;
+  try {
+    await db.collection("documents").add({ title, content, author });
+    res.status(201).send();
+  } catch (err) {
+    res.status(500).send();
+  }
+});
+
+app.put("/documents/:id", ensureAuthenticated, async (req, res) => {
+  const username = req.session.user.username;
+  const id = req.params.id;
+  const { title, content } = req.body;
+
+  try {
+    const documentRef = await db.collection("documents").doc(id).get();
+
+    if (documentRef.exists && documentRef.data().author == username) {
+      await db.collection("documents").doc(id).update({ title, content });
+
+      res.status(204).send();
+    } else {
+      res.status(403).send();
+    }
+  } catch (err) {
+    res.status(500).send();
+  }
+});
+
 app.delete("/documents/:id", ensureAuthenticated, async (req, res) => {
   const username = req.session.user.username;
   const id = req.params.id;
@@ -319,17 +350,6 @@ app.delete("/documents/:id", ensureAuthenticated, async (req, res) => {
     } else {
       res.status(403).send();
     }
-  } catch (err) {
-    res.status(500).send();
-  }
-});
-
-app.post("/documents", ensureAuthenticated, async (req, res) => {
-  const { title, content } = req.body;
-  const author = req.session.user.username;
-  try {
-    await db.collection("documents").add({ title, content, author });
-    res.status(201).send();
   } catch (err) {
     res.status(500).send();
   }

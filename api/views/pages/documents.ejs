@@ -30,11 +30,12 @@
                     <div class="btn-container">
                       <button type="submit" class="explain">Explain</button>
                       <button data-id="<%= document.id %>" class="delete">Delete</button>
+                      <button data-id="<%= document.id %>" data-index="<%= index %>" class="update">Save Changes</button>
                     </div>
                     <label for="formName<%= index %>">Document Title:</label>
-                    <input type="text" id="formName<%= index %>" name="formName" value="<%= document.title %>" required readonly />
+                    <input type="text" id="formName<%= index %>" name="formName" value="<%= document.title %>" required />
                     <label for="documentContent<%= index %>">Document Content:</label>
-                    <textarea class="documentContent" id="documentContent<%= index %>" name="documentContent" data-content="<%= document.content %>" rows="25" cols="80" required readonly><%= document.content %></textarea>
+                    <textarea class="documentContent" id="documentContent<%= index %>" name="documentContent" data-content="<%= document.content %>" rows="25" cols="80" required><%= document.content %></textarea>
                   </form>
                 </div>
               </div>

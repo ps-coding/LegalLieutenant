@@ -23,3 +23,12 @@ main {
   background-color: #d32f2f;
   color: white;
 }
+
+.openable .content .btn-container button.update {
+  background-color: #107fff;
+}
+
+.openable .content .btn-container button.update:hover {
+  background-color: #104fff;
+  color: white;
+}
