@@ -228,7 +228,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, passwordConfirmation } = req.body;
 
   const userRef = await db.collection("users").doc(username).get();
 
@@ -244,17 +244,24 @@ app.post("/signup", async (req, res) => {
         signup: true,
       });
     } else {
-      try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const userJSON = { username, password: hashedPassword };
-        await db.collection("users").doc(username).set(userJSON);
-        req.session.user = userJSON;
-        res.redirect("/");
-      } catch (err) {
+      if (password != passwordConfirmation) {
         res.render("pages/registration", {
-          error: "An error occurred. Please try again.",
+          error: "The passwords do not match.",
           signup: true,
         });
+      } else {
+        try {
+          const hashedPassword = await bcrypt.hash(password, 10);
+          const userJSON = { username, password: hashedPassword };
+          await db.collection("users").doc(username).set(userJSON);
+          req.session.user = userJSON;
+          res.redirect("/");
+        } catch (err) {
+          res.render("pages/registration", {
+            error: "An error occurred. Please try again.",
+            signup: true,
+          });
+        }
       }
     }
   }
