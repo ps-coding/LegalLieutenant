@@ -89,6 +89,11 @@ main button:hover {
   transform: scale(0.6);
 }
 
+.login input,
+.login button {
+  display: none;
+}
+
 #chk:checked ~ .login {
   transform: translateY(-500px);
 }
@@ -97,12 +102,19 @@ main button:hover {
   transform: scale(1);
 }
 
+#chk:checked ~ .login input {
+  display: flex;
+}
+
+#chk:checked ~ .login button {
+  display: block;
+}
+
 #chk:checked ~ .signup label {
   transform: scale(0.6);
 }
 
-.error {
-  background-color: rgba(255, 0, 0, 0.5);
-  text-align: center;
-  margin-top: 10px;
+#chk:checked ~ .signup input,
+#chk:checked ~ .signup button {
+  display: none;
 }
