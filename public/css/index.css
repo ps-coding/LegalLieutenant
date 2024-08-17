@@ -61,6 +61,11 @@ p {
   font-style: normal;
 }
 
+span a.signup:before,
+span a.signup:after {
+  content: "SIGN UP";
+}
+
 span a.login:before,
 span a.login:after {
   content: "LOG IN";
