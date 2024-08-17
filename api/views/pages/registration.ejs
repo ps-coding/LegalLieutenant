@@ -5,6 +5,7 @@
     <%- include('../partials/head', {title: "Authenticate"}); %>
     <link rel="stylesheet" href="css/registration.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 </head>
 
 <body>
@@ -22,11 +23,6 @@
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="password" name="passwordConfirmation" placeholder="Confirm Password" required>
                 <button>Sign up</button>
-                <% if (error != "") { %>
-                  <div class="error">
-                      <%= error %>
-                  </div>
-                <% } %>
             </form>
         </div>
 
@@ -36,14 +32,20 @@
                 <input type="text" name="username" placeholder="Username" autocorrect="off" autocapitalize="none" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <button>Log in</button>
-                <% if (error != "") { %>
-                  <div class="error">
-                      <%= error %>
-                  </div>
-                <% } %>
             </form>
         </div>
     </main>
+    <script>
+        <% if (error != "") { %>
+          document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                html: '<%= error %>',
+            });
+          });          
+        <% } %>
+    </script>
 </body>
 
 </html>

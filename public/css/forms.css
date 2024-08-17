@@ -20,15 +20,15 @@ form {
   justify-content: center;
 }
 
-input[type="text"],
-textarea {
+form input[type="text"],
+form textarea {
   padding: 0.5rem;
   border: 2px solid #3c3c3c;
   border-radius: 10px;
   max-width: 95%;
 }
 
-button {
+form button {
   margin-top: 0.5rem;
   background-color: #3c3c3c;
   color: white;
@@ -41,7 +41,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+form button:hover {
   background-color: whitesmoke;
   color: #3c3c3c;
 }
@@ -86,16 +86,11 @@ button:hover {
   text-align: center;
 }
 
-label:first-child {
+form label:first-child {
   margin-top: 0;
 }
 
-label {
+form label {
   margin-top: 2rem;
   margin-bottom: 0.5rem;
-}
-
-textarea[readonly],
-input[readonly] {
-  overflow: scroll;
 }
