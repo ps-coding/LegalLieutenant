@@ -7,7 +7,8 @@
 - Pahul Virk: Writer
 
 ## Project Description
-Our website is designed to assist first-generation, low-income (FGLI) students, as well as anyone in need of cheap legal assistance, in navigating complex and dense legal documents, such as immigration forms, employment documents, the FAFSA, rental agreements, various contracts, and more. Legal counsel is often very expensive, so FGLI students and low/middle-class individuals are often alone, wandering through the vast complexities of the U.S. legal system without assistance. This can lead to them signing predatory contracts or filling out forms incorrectly, which could jeopardize their future, especially at critical junctures.
+Our website is designed to assist first-generation, low-income (FGLI) students, as well as anyone in need of cheap legal assistance, in navigating complex and dense legal documents, such as immigration forms, employment documents, the FAFSA, rental agreements, various contracts, and more. Legal counsel is often very expensive, so FGLI students and low/middle-class individuals are often alone, wandering through the vast complexities of the U.S. legal system without assistance. This can lead to them signing predatory contracts or filling out forms incorrectly, which could jeopardize their future, especially at critical junctures.  
+  
 In response to these issues, our website simplifies the process of understanding and creating important legal documents by summarizing sections, defining difficult terms, and generating filled documents from scratch based on provided information (such as personal information or an outline).
 
 ## Inspiration
