@@ -73,6 +73,7 @@ stored in a database. In order to do this, we hash/salt passwords with bcrypt an
 
 ## User Guide
 Visit the [public site](https://legal-lieutenant.vercel.app/).
+
 ### Explain Page
 - Provide a document title
 - Upload a PDF, DOC, DOCX, etc., or enter the document's text
@@ -83,6 +84,7 @@ Visit the [public site](https://legal-lieutenant.vercel.app/).
   - The definition will appear in a pop-up
   - You must have one and only one word selected; otherwise, we will assume that you are just trying to copy a part of the document
 - Download a document or save it to your account using the buttons at the top of the page
+
 ### Generate Page
 - Provide the document title
   - If you don't know the specific title, provide the document category, such as "immigration papers," and the document will be inferred
