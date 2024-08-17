@@ -36,15 +36,24 @@
         </div>
     </main>
     <script>
-        <% if (error != "") { %>
           document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                html: '<%= error %>',
-            });
+            const chk = document.getElementById('chk');
+            <% if(signup) { %>
+              chk.checked = false;
+            <% } else { %>
+              chk.checked = true;
+            <% } %>
+            
+            setTimeout(() => {
+              <% if (error != "") { %>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    html: '<%= error %>',
+                });
+              <% } %>
+            }, 300);
           });          
-        <% } %>
     </script>
 </body>
 
