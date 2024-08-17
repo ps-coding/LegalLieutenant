@@ -9,3 +9,17 @@ main {
 .nobg {
   background-color: transparent;
 }
+
+.openable .content .btn-container button {
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.openable .content .btn-container button.delete {
+  background-color: #f44336;
+}
+
+.openable .content .btn-container button.delete:hover {
+  background-color: #d32f2f;
+  color: white;
+}

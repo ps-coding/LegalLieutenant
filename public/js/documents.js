@@ -8,8 +8,7 @@ deleteButtons.forEach((button) => {
       text: "You won't be able to undo this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#d33",
       confirmButtonText: "Permanently Delete",
     }).then((result) => {
       if (result.isConfirmed) {
@@ -33,8 +32,8 @@ deleteButtons.forEach((button) => {
   });
 });
 
-// const contents = [...document.getElementsByClassName("documentContent")];
-//
-// contents.forEach((content) => {
-//   content.innerText = content.dataset.content;
-// });
+const contents = [...document.getElementsByClassName("documentContent")];
+
+contents.forEach((content) => {
+  content.value = content.dataset.content;
+});

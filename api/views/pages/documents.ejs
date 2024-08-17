@@ -27,8 +27,10 @@
               <div class="content">
                 <div>
                   <form action="/explain-text" method="POST" class="nobg">
-                    <button type="submit">Explain</button>
-                    <button data-id="<%= document.id %>">Delete</button>
+                    <div class="btn-container">
+                      <button type="submit" class="explain">Explain</button>
+                      <button data-id="<%= document.id %>" class="delete">Delete</button>
+                    </div>
                     <label for="formName<%= index %>">Document Title:</label>
                     <input type="text" id="formName<%= index %>" name="formName" value="<%= document.title %>" required readonly />
                     <label for="documentContent<%= index %>">Document Content:</label>

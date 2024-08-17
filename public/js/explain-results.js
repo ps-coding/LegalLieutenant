@@ -118,14 +118,17 @@ function saveDocument() {
 }
 
 function download() {
+  const formName = titleH.dataset.formname;
   const text = contentP.dataset.content;
+
+  const fileName = formName.replaceAll(/[\/|\\:*?"<>\s]/g, "_");
 
   const blob = new Blob([text], { type: "text/plain" });
 
   const link = document.createElement("a");
 
   link.href = URL.createObjectURL(blob);
-  link.download = "download.txt";
+  link.download = `${fileName}.txt`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

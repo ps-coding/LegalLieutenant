@@ -29,7 +29,9 @@
     <form style="border-bottom: 2px solid black;" action="/explain-file" method="POST" enctype="multipart/form-data">
       <label for="formName">Document Title:</label>
       <input type="text" id="formName" name="formName" required />
+      <br />
       <input type="file" id="file" name="file" required />
+      <br />
       <button type="submit">Explain File Document</button>
     </form>
     <form action="/explain-text" method="POST">
