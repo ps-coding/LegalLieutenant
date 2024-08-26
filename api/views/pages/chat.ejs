@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/chat.css" rel="stylesheet"></link>
+    <link href="/css/chat.css" rel="stylesheet">
+    </link>
     <script src="/js/chat.js" defer></script>
     <title>Document Chat</title>
 </head>
+
 <body>
     <div class="chat-container">
-        <h2>Document Chat: <%= documentTitle %></h2>
+        <h2>Document Chat: <%= documentTitle %>
+        </h2>
         <div class="chat-log" id="chat-log">
         </div>
         <form id="chat-form" class="chat-form">
@@ -17,5 +21,45 @@
             <button type="submit">Send</button>
         </form>
     </div>
+
+    <script>
+        const chatLog = document.getElementById('chat-log');
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('userInput');
+
+        chatForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const userMessage = userInput.value;
+            userInput.value = '';
+
+            appendMessage('user', userMessage);
+
+            const response = await fetch('/ask-chatbot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    documentId: '<%= documentId %>',
+                    documentTitle: '<%= documentTitle %>',
+                    documentContent: '<%= documentContent %>',
+                    formName: '<%= formName %>',
+                    question: userMessage
+                })
+            });
+            const data = await response.json();
+
+            appendMessage('chatbot', data.answer);
+        });
+
+        function appendMessage(sender, message) {
+            const messageElem = document.createElement('div');
+            messageElem.classList.add('message', sender);
+            messageElem.textContent = message;
+            chatLog.appendChild(messageElem);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+    </script>
 </body>
+
 </html>
