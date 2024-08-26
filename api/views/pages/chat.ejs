@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/chat.css" rel="stylesheet"></link>
+    <script src="/js/chat.js" defer></script>
+    <title>Document Chat</title>
+</head>
+<body>
+    <div class="chat-container">
+        <h2>Document Chat: <%= documentTitle %></h2>
+        <div class="chat-log" id="chat-log">
+        </div>
+        <form id="chat-form" class="chat-form">
+            <input type="text" id="userInput" placeholder="Ask a question..." required />
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</body>
+</html>

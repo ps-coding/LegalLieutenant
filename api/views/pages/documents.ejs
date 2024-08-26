@@ -37,6 +37,14 @@
                     <label for="documentContent<%= index %>">Document Content:</label>
                     <textarea class="documentContent" id="documentContent<%= index %>" name="documentContent" data-content="<%= document.content %>" rows="25" cols="80" required><%= document.content %></textarea>
                   </form>
+                  
+                  <form action="/chat" method="POST" class="nobg">
+                    <input type="hidden" name="documentId" value="<%= document.id %>">
+                    <input type="hidden" name="documentTitle" value="<%= document.title %>">
+                    <input type="hidden" name="documentContent" value="<%= encodeURIComponent(document.content) %>">
+                    <input type="hidden" name="formName" value="<%= encodeURIComponent(document.title) %>">
+                    <button type="submit" class="chat" style="text-align: center; height: 5vh; width: 20vh;">Document Chat</button>
+                  </form>
                 </div>
               </div>
             </div>

@@ -17,6 +17,9 @@ const bcrypt = require("bcrypt");
 const app = express();
 const port = process.env["PORT"] || 3000;
 
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.json({ limit: '10mb' }));
+
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 
 if (firebase.apps.length === 0) {
@@ -26,6 +29,7 @@ if (firebase.apps.length === 0) {
 }
 
 const db = firebase.firestore();
+
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
@@ -281,6 +285,12 @@ app.get("/explain", ensureAuthenticated, (_, res) => {
   res.render("pages/explain-upload");
 });
 
+app.post('/chat', async (req, res) => {
+  const { documentId, documentTitle, documentContent, formName } = req.body;
+
+  res.render('pages/chat', { documentId, documentTitle, documentContent, formName });
+});
+
 app.get("/generate", ensureAuthenticated, (_, res) => {
   res.render("pages/generate-upload");
 });
@@ -462,6 +472,43 @@ app.post("/generate-with-outline", ensureAuthenticated, async (req, res) => {
   );
   res.render("pages/generate-results", { formName, documentContent });
 });
+
+app.post('/ask-chatbot', async (req, res) => {
+  const { documentId, documentTitle, documentContent, formName, question } = req.body;
+
+  if (!documentContent || documentContent.trim() === "") {
+    return res.status(400).json({ error: 'Document content is empty or missing.' });
+}
+
+  const prompt = `You are a helpful assistant. A user has provided you with a document titled "${documentTitle}" with the following content:\n\n"${documentContent}".\n\nThe user might ask questions about this document. Here is the user's question: "${question}". Please provide a clear and concise answer based on the document content.`;
+
+  try {
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+          },
+          body: JSON.stringify({
+              model: 'gpt-4o-mini',
+              messages: [
+                  { role: 'system', content: 'You are a helpful assistant.' }, 
+                  { role: 'user', content: prompt }
+              ],
+              max_tokens: 150
+          })
+      });
+
+      const data = await response.json();
+      const answer = data.choices[0].message.content.trim();
+
+      res.json({ answer });
+  } catch (error) {
+      console.error('Error communicating with ChatGPT API:', error);
+      res.status(500).json({ error: 'An error occurred while processing your request.' });
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}.`);
