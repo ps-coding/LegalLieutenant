@@ -12,9 +12,13 @@
 
 <body>
     <div class="chat-container">
+        <form action="/documents">
+            <button type="submit">Back</button>
+        </form>
         <h2>Document Chat: <%= documentTitle %>
         </h2>
         <small>Note that each question is sent in its own context bubble. To increase accuracy and decrease the bot's confusion, we do not include previous messages as context.</small>
+        <br />
         <div class="chat-log" id="chat-log">
         </div>
         <form id="chat-form" class="chat-form">
@@ -56,7 +60,7 @@
         function appendMessage(sender, message) {
             const messageElem = document.createElement('div');
             messageElem.classList.add('message', sender);
-            messageElem.textContent = message;
+            messageElem.innerText = message;
             chatLog.appendChild(messageElem);
             chatLog.scrollTop = chatLog.scrollHeight;
         }
