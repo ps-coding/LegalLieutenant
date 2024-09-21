@@ -29,7 +29,7 @@
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
-    "express": "^4.19.2",
+    "express": "^4.20.0",
     "express-session": "^1.18.0",
     "firebase-admin": "^12.3.1",
     "firestore-store": "^2.0.2",
