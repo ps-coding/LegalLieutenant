@@ -5,7 +5,6 @@
 - Prasham Shah ([ps-coding](https://github.com/ps-coding)): Team Lead and Chief Coder/Writer
 - Samik Shah ([samik-py](https://github.com/samik-py)): Back-End Coder
 - Aniketh Chadive ([ani369chad](https://github.com/ani369chad)): Front-End Coder
-- Pahul Virk ([pahulvirk07](https://github.com/pahulvirk07)): Writer
 
 ## Project Description
 
