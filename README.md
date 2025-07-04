@@ -1,5 +1,5 @@
 # [Legal Lieutenant](https://legal-lieutenant.vercel.app)
-## Won 1st place 🥇 at Empower Hacks 2.0! The prompt was to develop a website to assist first-generation, low-income (FGLI) students, but its impact can go even further...
+## Won 1st place 🥇 at Empower Hacks 2.0! The prompt was to develop a project in one week (though we continued developing it after) to assist first-generation, low-income (FGLI) students, but its impact can go even further...
 
 ## Contributors
 
