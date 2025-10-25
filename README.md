@@ -1,5 +1,5 @@
 # [Legal Lieutenant](https://legal-lieutenant.vercel.app)
-## Won 1st place 🥇 at Empower Hacks 2.0! The prompt was to develop a project in one week (though we continued developing it after) to assist first-generation, low-income (FGLI) students, but its impact can go even further...
+## Won 1st place 🥇 at Empower Hacks 2.0! The prompt was to develop a project in one week (though we've continued developing this software long after) that can assist low-income individuals, immigrants, and first-generation students. We plan to go much further.
 
 ## Contributors
 
@@ -15,7 +15,7 @@ In response to these issues, our website simplifies the process of understanding
 
 ## Inspiration
 
-The inspiration for this project stemmed from our personal experiences as first-generation students whose parents immigrated from India. We witnessed firsthand the challenges our families faced in understanding and completing complex forms without adequate guidance. Some of them fell into traps, signing documents they did not understand, which led to issues that they are still suffering from to this day. These experiences highlighted the need for a tool that could bridge the gap and provide much-needed support. By creating this website, we aim to empower students like us and anyone in need of legal help, ensuring they have the resources and confidence to navigate the legal system.
+The inspiration for this project stemmed from our personal experiences as students whose parents immigrated from India. We witnessed firsthand the challenges our immediate family and relatives faced in understanding and completing complex forms without adequate guidance. Some of our relatives fell into traps, signing documents they did not understand, which led to financial and legal struggles that they are still suffering from to this day. These experiences highlighted the need for a tool that could bridge the gap and provide much-needed support. By creating this website, we aim to empower immigrants and anyone in need of legal help, ensuring they have the resources and confidence to navigate the legal system.
 
 ## What It Does
 
