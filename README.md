@@ -1,5 +1,5 @@
 # [Legal Lieutenant](https://legal-lieutenant.vercel.app)
-## We won 1st place 🥇 at Empower Hacks 2.0! The prompt was to develop a project in one week that can assist low-income individuals, immigrants, and first-generation students. However, we didn't stop there.
+## We won [1st place](https://devpost.com/software/empower-hacks-2-0-wip) 🥇 at Empower Hacks 2.0! The prompt was to develop a project in one week that can assist low-income individuals, immigrants, and first-generation students. However, we didn't stop there.
 
 ## Contributors
 
